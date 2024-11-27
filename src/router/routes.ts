@@ -1,7 +1,10 @@
 export const routes = [
   {
-    path: '/',
-    name: 'home',
-    // component: HomeView
+    path: '/auth', 
+    name: 'auth-index', 
+    component: () => import(/* webpackChunkName: "AuthIndex" */ '../views/auth/Index.vue'),
+    meta: {
+      isPublic: true
+    }
   }
 ]
