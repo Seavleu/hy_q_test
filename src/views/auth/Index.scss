@@ -1,0 +1,16 @@
+div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  img {
+    width: 50vw;
+    height: 100vh;
+  }
+
+  .form {
+    width: 50vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
