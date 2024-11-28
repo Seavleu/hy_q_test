@@ -1,11 +1,71 @@
+@mixin flex($direction: row, $justify: flex-start, $align: stretch, $gap: 0) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  gap: $gap;
+}
+
 @mixin center-flex {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-@mixin box-shadow($color) {
+@mixin grid($columns: 1fr, $rows: auto, $gap: 0, $align: stretch, $justify: stretch) {
+  display: grid;
+  grid-template-columns: $columns;
+  grid-template-rows: $rows;
+  gap: $gap;
+  align-items: $align;
+  justify-items: $justify;
+}
+
+@mixin typography($size: 16px, $weight: normal, $color: #000, $line-height: 1.5) {
+  font-size: $size;
+  font-weight: $weight;
+  color: $color;
+  line-height: $line-height;
+}
+
+@mixin border-bg($border-color: transparent, $border-width: 1px, $radius: 0, $bg-color: null) {
+  border: $border-width solid $border-color;
+  border-radius: $radius;
+  @if $bg-color != null {
+    background-color: $bg-color;
+  }
+}
+
+
+@mixin position($type: static, $top: auto, $right: auto, $bottom: auto, $left: auto) {
+  position: $type;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+@mixin size($width: auto, $height: auto, $min-width: 0, $min-height: 0) {
+  width: $width;
+  height: $height;
+  min-width: $min-width;
+  min-height: $min-height;
+}
+
+@mixin box-shadow($color: #000, $opacity: 0.1) {
   box-shadow:
-    0 4px 6px rgba($color, 0.1),
-    0 1px 3px rgba($color, 0.06);
+    0 4px 6px rgba($color, $opacity),
+    0 1px 3px rgba($color, $opacity / 2);
+}
+
+@mixin icon($name, $size: cover) {
+  background: #eeeeee url('/src/assets/images/common/ico_#{$name}.png') no-repeat center / #{$size};
+}
+
+@mixin background($path, $name, $size: cover) {
+  background: url('/src/assets/images/#{$path}/#{$name}') no-repeat center/#{$size};
+}
+
+@mixin icon($name, $path: '/src/assets/images/common', $size: cover, $position: center) {
+  background: url('#{$path}/#{$name}.png') no-repeat $position / $size;
 }

@@ -1,7 +1,7 @@
 export const routes = [
   {
-    path: '/auth', 
-    name: 'auth-index', 
+    path: '/login', 
+    name: 'login', 
     component: () => import(/* webpackChunkName: "AuthIndex" */ '../views/auth/Index.vue'),
     meta: {
       isPublic: true

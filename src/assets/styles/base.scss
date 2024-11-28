@@ -1,3 +1,5 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+
 *,
 *::before,
 *::after {
@@ -7,25 +9,59 @@
   padding: 0;
 }
 
+html,
+body {
+  overflow-x: scroll;
+  height: 100%;
+  font-size: 14px;
+  font-family:
+    'Pretendard',
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  word-break: keep-all;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: url('@/assets/images/bg_body.png') no-repeat center center fixed;
+  background: url('@/assets/images/login/bg_body.png') no-repeat center center fixed;
   background-size: cover;
 }
 
-// * Skeleton Loader *//
-.loader-skeleton {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(5px);
-  background-color: rgba(0, 0, 0, 0.2);
-  z-index: 1111;
+img,
+video,
+audio,
+object,
+embed {
+  border: 0;
+  vertical-align: middle;
+  height: auto;
+}
+
+table {
+  border-spacing: 0;
+  border: 0;
+  border-collapse: collapse;
+}
+
+form {
+  display: inline;
+}
+
+button {
+  border: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+strong {
+  font-weight: bold;
 }
