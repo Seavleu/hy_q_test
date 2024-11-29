@@ -1,5 +1,103 @@
 @import 'base.scss';
 
+#header {
+  position: relative;
+  margin: 0 auto;
+  padding: 0 60px;
+  max-width: 1920px;
+  min-width: 1920px;
+  height: 140px;
+  h1 {
+    position: relative;
+    z-index: 1;
+    padding-bottom: 10px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    img {
+      height: 40px;
+    }
+  }
+  #nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    ul {
+      position: relative;
+      z-index: 1;
+      li {
+        padding-right: 50px;
+        float: left;
+        a {
+          color: #8a95aa;
+          font-size: 20px;
+          font-weight: 700;
+        }
+        &.active {
+          a {
+            color: #fff;
+          }
+        }
+      }
+      &:after {
+        content: '';
+        display: table;
+        table-layout: fixed;
+        clear: both;
+      }
+    }
+  }
+  .side {
+    position: absolute;
+    top: 0;
+    right: 60px;
+    z-index: 1;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 112px;
+    align-items: center;
+    .user-info {
+      position: relative;
+      padding-right: 28px;
+      font-size: 16px;
+      color: #999;
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 1px;
+        height: 100%;
+        background-color: #2d3a7c;
+      }
+    }
+    .btn-member {
+      a {
+        cursor: pointer;
+        margin-left: 28px;
+      }
+    }
+  }
+}
+
+#footer {
+  margin-top: -40px;
+  position: relative;
+  min-width: 1920px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #525a84;
+  text-align: center;
+  background-color: #043241;
+}
+
 // * Skeleton Loader *//
 .loader-skeleton {
     position: fixed;

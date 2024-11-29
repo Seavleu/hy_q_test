@@ -1,5 +1,6 @@
 .login-con {
   @include grid(1fr 1fr, auto, 0, center, center);
+  position: relative;
 
   img {
     @include size(50vw, 100vh);
@@ -8,7 +9,6 @@
   .login-box {
     @include flex(column, flex-start);
     @include size(516px, auto);
-    margin-left: 20%;
 
     .form {
       @include size(100%, auto);
@@ -29,15 +29,19 @@
         color: #fff;
         &:nth-child(1),
         &:nth-child(2) {
-          @include border-bg(rgba(255, 255, 255, 0.05), 0, 8px, rgba(255, 255, 255, 0.05));
+          @include border-bg(
+            rgba(255, 255, 255, 0.05),
+            0,
+            8px,
+            rgba(255, 255, 255, 0.05)
+          );
           @include grid(14% 1fr);
-          margin-bottom: 18px; 
-          
+          margin-bottom: 18px;
+
           label {
             @include typography(18px, 700);
             padding: 0 10px 0 20px;
-            line-height: 50px; 
-
+            line-height: 50px;
           }
           input {
             padding: 0 10px;
@@ -51,47 +55,45 @@
         }
         &:nth-child(3) {
           padding-bottom: 60px;
-        
+
           input[type='checkbox'] {
-            display: none; 
+            display: none;
           }
-        
+
           label {
             position: relative;
             display: inline-block;
             width: 22px;
             height: 22px;
             cursor: pointer;
-            margin-right: 10px; 
-        
+            margin-right: 10px;
+
             &:before {
               content: '';
               @include size(22px, 22px);
               @include position(absolute, 5px, 0);
-              @include icon('ico_checkbox'); 
-              background-position-y: top; 
+              @include icon('ico_checkbox');
+              background-position-y: top;
             }
-        
+
             &:after {
               content: '';
               @include size(22px, 22px);
               @include position(absolute, 0, 0);
-              @include icon('ico_checkbox_checked'); 
-              opacity: 0; 
+              @include icon('ico_checkbox_checked');
+              opacity: 0;
             }
           }
-        
+
           input[type='checkbox']:checked + label {
             &:before {
-              background-position-y: bottom; 
+              background-position-y: bottom;
             }
             &:after {
-              opacity: 1; 
+              opacity: 1;
             }
           }
-         
         }
-        
       }
 
       .submit {
@@ -99,7 +101,7 @@
           @include size(100%, 50px);
           @include typography(20px, 700, #fff);
           @include border-bg(#fff, 1px, 8px, transparent);
-        } 
+        }
       }
     }
 
@@ -110,7 +112,6 @@
           height: 100%;
         }
       }
-
       dd {
         color: #8a95aa;
         font-size: 12px;
@@ -122,41 +123,42 @@
   }
 }
 
-.alert {
-  @include size(383px, auto);
-  padding: 40px 50px;
-  border-radius: 14px;
-  text-align: center;
-  background: #fff; 
-
-  p { 
-    @include typography(30px, 800, #111 !important);
-    position: relative;
-    padding-top: 100px; 
+.backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+  v-card {
+    @include flex(column, center, center);
+    padding: 50px 50px;
+    border-radius: 14px;
+    background: #fff;
     text-wrap: nowrap;
 
-    &:before {
-      content: '';
-      @include position(absolute, 0, auto, auto, 50%);
-      @include size(90px, 90px);
-      border-radius: 50%;
-      background: #eeeeee url('/src/assets/images/login/ico_call.png') no-repeat center center;
-      transform: translateX(-50%);
-    }
-  }
+    p {
+      @include typography(30px, 800, #111 !important);
+      @include position(relative, 60px, 0);
 
-  dl {
-    dt {
-      padding-bottom: 24px;
-      @include typography(18px);
+      &:before {
+        content: '';
+        @include position(absolute, -100px, 0, 0, 50%);
+        @include size(90px, 90px);
+        border-radius: 50%;
+        background: #eeeeee url('/src/assets/images/login/ico_call.png')
+          no-repeat center center;
+        transform: translateX(-50%);
+        color: #111;
+      }
     }
-    dd {
-      .v-btn {
+
+    dl {
+      text-align: center;
+      @include flex(column, center, center);
+      margin-top: 80px;
+      dt {
+        padding-bottom: 24px;
+        @include typography(18px, 500, #111);
+      }
+      dd {
         @include size(90px, 44px);
-
-        .v-btn__content {
-          @include typography(18px, 700);
-        }
       }
     }
   }

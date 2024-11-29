@@ -54,7 +54,7 @@ const sockets = {
              * 로그아웃하면 컨포넌트를 한번 더 호출하고 넘어가는 이슈가있어 방어 처림함.
              * 이슈 페이지: Main
              */
-            if (socket && routes.currentRoute.value.name !== 'login') {
+            if (socket && routes.currentRoute.value.name !== 'auth') {
                 if (isSocketReady()) {
                     socket!.send(JSON.stringify(data))
                 } else {

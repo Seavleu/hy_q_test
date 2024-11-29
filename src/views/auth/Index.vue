@@ -2,14 +2,12 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCookies } from 'vue3-cookies'
-import { useUserStore } from '@/stores/user'
-import { AUTH_API } from '@/lib/api'
 import { images } from '@/constants'
-import type { User } from '@/types/store'
+import { useAuthStore } from '@/stores/auth'
 
 const router = useRouter()
 const { cookies } = useCookies()
-const userStore = useUserStore()
+const authStore = useAuthStore()
 
 const userId = ref('')
 const userPw = ref('')
@@ -17,29 +15,10 @@ const errorMessage = ref(false)
 const saveLoginId = ref(false)
 
 const login = async () => {
-  try {
-    const res = await AUTH_API.login({
-      user_id: userId.value,
-      user_pw: userPw.value,
-    })
-
-    if (res.data) {
-      const { token, user_seq, plant_seq, plant_name } = res.data
-      const userData: User = {
-        user_id: userId.value,
-        user_seq,
-        plant_seq: plant_seq || 0,
-        plant_name: plant_name || '',
-      }
-      cookies.set('token', token)
-      cookies.set('user_info', JSON.stringify(userData))
-      userStore.setUser(userData)
-      router.push('/')
-    } else {
-      errorMessage.value = true
-    }
-  } catch (error) {
-    console.error('Login Error:', error)
+  const success = await authStore.login(userId.value, userPw.value)
+  if (success) {
+    router.push('/')
+  } else {
     errorMessage.value = true
   }
 }
@@ -72,29 +51,36 @@ onMounted(() => {
           Hy-Q에 오신 것을 환영합니다.
         </p>
       </div>
-
       <div class="con">
         <p>
           <label>ID</label>
-          <input v-model="userId" type="text" placeholder="아이디 입력" />
+          <input 
+          v-model="userId" 
+          type="text" 
+          placeholder="아이디 입력"
+          />
         </p>
         <p>
           <label>PW</label>
-          <input v-model="userPw" type="password" @keyup.enter="login" placeholder="비밀번호 입력" />
+          <input
+            v-model="userPw"
+            type="password"
+            @keyup.enter="login"
+            placeholder="비밀번호 입력" />
         </p>
         <p>
-          <input type="checkbox" id="saveLogin" v-model="saveLoginId" @change="saveId" />
+          <input
+            type="checkbox"
+            id="saveLogin"
+            v-model="saveLoginId"
+            @change="saveId" />
           <label for="saveLogin"></label>
           <span>아이디 저장</span>
         </p>
-
-
         <div class="submit">
           <v-btn variant="outlined" block @click="login">로그인</v-btn>
-
-          <!-- TODO: Implement alert box -->
-          <!-- <v-dialog v-model="errorMessage" width="auto">
-            <div class="alert">
+          <v-dialog v-model="errorMessage" class="backdrop" width="auto">
+            <v-card>
               <p>1544-0000</p>
               <dl>
                 <dt>
@@ -102,20 +88,22 @@ onMounted(() => {
                   관리자에게 문의해주세요.
                 </dt>
                 <dd>
-                  <v-btn color="#E83830" flat @click="errorMessage = false">확인</v-btn>
+                  <v-btn color="#E83830" flat @click="(errorMessage = false)"
+                    >확인</v-btn
+                  >
                 </dd>
               </dl>
-            </div>
-          </v-dialog> -->
-
+            </v-card>
+          </v-dialog>
         </div>
       </div>
-
       <dl class="foot">
         <dt><img :src="images.footer" alt="REC's Innovation" /></dt>
         <dd>
-          대표자 : 임정민 사업자등록번호 :142-81-86179 TEL : 061-820-7533 FAX : 070-8230-7533<br />
-          주소 : 전남 나주시 교육길 13 스마트파크지식산업센터 G동 201호(본점), 202호(기업부설연구소)<br />
+          대표자 : 임정민 사업자등록번호 :142-81-86179 TEL : 061-820-7533 FAX :
+          070-8230-7533<br />
+          주소 : 전남 나주시 교육길 13 스마트파크지식산업센터 G동 201호(본점),
+          202호(기업부설연구소)<br />
           Copyright ⓒ 2023 렉스이노베이션 All rights reserved.
         </dd>
       </dl>

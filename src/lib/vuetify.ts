@@ -5,6 +5,7 @@ import { VTextarea } from 'vuetify/components/VTextarea'
 import { VCheckbox } from 'vuetify/components/VCheckbox'
 import { VCombobox } from 'vuetify/components/VCombobox'
 import { VIcon } from 'vuetify/components/VIcon'
+import { VDialog } from 'vuetify/components'
  
 const vuetifyOptions: VuetifyOptions = {
   components: {
@@ -12,7 +13,8 @@ const vuetifyOptions: VuetifyOptions = {
     VTextarea,
     VCheckbox,
     VCombobox,
-    VIcon
+    VIcon,
+    VDialog
   },
   directives: {}
 }
