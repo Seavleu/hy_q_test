@@ -1,26 +1,15 @@
-// TODO: Global app state => loading
-import { defineStore } from 'pinia';
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
-export const useLoaderStore = defineStore('loading', {
-  // State: Tracks whether the loader is active
-  state: () => ({
-    isLoading: false, // Initial state of the loader
-  }),
+export const useLoaderStore = defineStore('loader', () => {
+  const isLoading = ref(false)
 
-  // Actions: Functions to modify the state
-  actions: {
-    /**
-     * Activates the loader.
-     */
-    startLoading(): void {
-      this.isLoading = true;
-    },
+  function startLoading() {
+    isLoading.value = true
+  }
+  function stopLoading() {
+    isLoading.value = false
+  }
 
-    /**
-     * Deactivates the loader.
-     */
-    stopLoading(): void {
-      this.isLoading = false;
-    },
-  },
-});
+  return { isLoading, startLoading, stopLoading }
+})

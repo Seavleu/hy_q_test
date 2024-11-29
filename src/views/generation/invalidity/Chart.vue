@@ -2,7 +2,7 @@
 
 <template>
   <div>
-    <h1>GenerationView</h1>
+    <h1>ChartView</h1>
   </div>
 </template>
 

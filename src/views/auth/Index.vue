@@ -54,11 +54,7 @@ onMounted(() => {
       <div class="con">
         <p>
           <label>ID</label>
-          <input 
-          v-model="userId" 
-          type="text" 
-          placeholder="아이디 입력"
-          />
+          <input v-model="userId" type="text" placeholder="아이디 입력" />
         </p>
         <p>
           <label>PW</label>
@@ -80,7 +76,7 @@ onMounted(() => {
         <div class="submit">
           <v-btn variant="outlined" block @click="login">로그인</v-btn>
           <v-dialog v-model="errorMessage" class="backdrop" width="auto">
-            <v-card>
+            <div class="card">
               <p>1544-0000</p>
               <dl>
                 <dt>
@@ -93,7 +89,7 @@ onMounted(() => {
                   >
                 </dd>
               </dl>
-            </v-card>
+            </div>
           </v-dialog>
         </div>
       </div>

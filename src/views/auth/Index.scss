@@ -126,7 +126,7 @@
 .backdrop {
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(3px);
-  v-card {
+  .card {
     @include flex(column, center, center);
     padding: 50px 50px;
     border-radius: 14px;

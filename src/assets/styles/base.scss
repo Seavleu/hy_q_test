@@ -33,14 +33,40 @@ body {
   background-size: cover;
 }
 
-img,
-video,
-audio,
-object,
-embed {
-  border: 0;
-  vertical-align: middle;
-  height: auto;
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+nav,
+section,
+summary {
+  display: block;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+dl,
+dt,
+dd,
+ul,
+ol,
+li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+caption,
+address,
+legend,
+hr {
+  display: none;
 }
 
 table {
@@ -53,7 +79,19 @@ form {
   display: inline;
 }
 
+input,
+select {
+  background: transparent;
+  border: 0;
+}
+
 button {
+  border: 0;
+}
+
+fieldset {
+  padding: 0;
+  margin: 0;
   border: 0;
 }
 
@@ -64,4 +102,22 @@ a {
 
 strong {
   font-weight: bold;
+}
+
+img,
+audio,
+video,
+object,
+embed {
+  border: 0;
+  vertical-align: middle;
+  height: auto;
+}
+
+audio,
+canvas,
+video {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
 }
