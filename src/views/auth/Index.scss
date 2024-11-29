@@ -31,13 +31,13 @@
         &:nth-child(2) {
           @include border-bg(rgba(255, 255, 255, 0.05), 0, 8px, rgba(255, 255, 255, 0.05));
           @include grid(14% 1fr);
-          margin-bottom: 18px;
+          margin-bottom: 18px; 
           
           label {
+            @include typography(18px, 700);
             padding: 0 10px 0 20px;
-            line-height: 50px;
-            font-weight: 700;
-            letter-spacing: -0.18px;
+            line-height: 50px; 
+
           }
           input {
             padding: 0 10px;
@@ -51,7 +51,47 @@
         }
         &:nth-child(3) {
           padding-bottom: 60px;
+        
+          input[type='checkbox'] {
+            display: none; 
+          }
+        
+          label {
+            position: relative;
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+            margin-right: 10px; 
+        
+            &:before {
+              content: '';
+              @include size(22px, 22px);
+              @include position(absolute, 5px, 0);
+              @include icon('ico_checkbox'); 
+              background-position-y: top; 
+            }
+        
+            &:after {
+              content: '';
+              @include size(22px, 22px);
+              @include position(absolute, 0, 0);
+              @include icon('ico_checkbox_checked'); 
+              opacity: 0; 
+            }
+          }
+        
+          input[type='checkbox']:checked + label {
+            &:before {
+              background-position-y: bottom; 
+            }
+            &:after {
+              opacity: 1; 
+            }
+          }
+         
         }
+        
       }
 
       .submit {

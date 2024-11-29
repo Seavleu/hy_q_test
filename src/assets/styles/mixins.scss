@@ -21,11 +21,10 @@
   justify-items: $justify;
 }
 
-@mixin typography($size: 16px, $weight: normal, $color: #000, $line-height: 1.5) {
+@mixin typography($size: 16px, $weight: normal, $color: #fff) {
   font-size: $size;
   font-weight: $weight;
-  color: $color;
-  line-height: $line-height;
+  color: $color; 
 }
 
 @mixin border-bg($border-color: transparent, $border-width: 1px, $radius: 0, $bg-color: null) {

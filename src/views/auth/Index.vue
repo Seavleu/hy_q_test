@@ -34,13 +34,13 @@ const login = async () => {
       cookies.set('token', token)
       cookies.set('user_info', JSON.stringify(userData))
       userStore.setUser(userData)
-      router.push('/') 
+      router.push('/')
     } else {
-      errorMessage.value = true 
+      errorMessage.value = true
     }
   } catch (error) {
     console.error('Login Error:', error)
-    errorMessage.value = true  
+    errorMessage.value = true
   }
 }
 
@@ -84,8 +84,10 @@ onMounted(() => {
         </p>
         <p>
           <input type="checkbox" id="saveLogin" v-model="saveLoginId" @change="saveId" />
-          <label for="saveLogin"> 아이디 저장 </label>
+          <label for="saveLogin"></label>
+          <span>아이디 저장</span>
         </p>
+
 
         <div class="submit">
           <v-btn variant="outlined" block @click="login">로그인</v-btn>
