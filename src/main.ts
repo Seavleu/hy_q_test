@@ -1,4 +1,5 @@
 import './assets/styles/base.scss'
+import './assets/styles/common.scss'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
@@ -18,10 +19,9 @@ import http from './lib/axios'
 import vuetify from './lib/vuetify'
 import { sockets, ws } from './lib/websocket'
 
-const app = createApp(App)
+const app = createApp(App).use(router)
 
-app.use(createPinia())
-app.use(router)
+app.use(createPinia()) 
 app.use(vuetify)
 app.use(HighchartsVue)
 app.use(Vue3Lottie)

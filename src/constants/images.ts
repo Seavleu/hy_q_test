@@ -28,7 +28,7 @@ import waterCircus1 from '@/assets/images/common/bg_wather_circus1.png';
 import waterCircus2 from '@/assets/images/common/bg_wather_circus2.png';
 
 
-export const images = {
+export default {
     logo,
     bg_login,
     footer,

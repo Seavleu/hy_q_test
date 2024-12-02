@@ -6,6 +6,7 @@ import { VCheckbox } from 'vuetify/components/VCheckbox'
 import { VCombobox } from 'vuetify/components/VCombobox'
 import { VIcon } from 'vuetify/components/VIcon'
 import { VDialog } from 'vuetify/components'
+import { VProgressCircular } from 'vuetify/components'
  
 const vuetifyOptions: VuetifyOptions = {
   components: {
@@ -14,7 +15,8 @@ const vuetifyOptions: VuetifyOptions = {
     VCheckbox,
     VCombobox,
     VIcon,
-    VDialog
+    VDialog,
+    VProgressCircular,
   },
   directives: {}
 }

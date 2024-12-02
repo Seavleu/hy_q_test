@@ -16,11 +16,9 @@ watch(
     if (newPath !== oldPath) {
       const currentRoute = route.matched[1]
       sideInfo.value =
-        currentRoute &&
-        currentRoute.children &&
-        currentRoute.children.length > 0
-          ? currentRoute
-          : null
+      currentRoute && currentRoute.children && currentRoute.children.length > 0
+        ? currentRoute
+        : null
     }
   }
 )

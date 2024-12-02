@@ -6,4 +6,3 @@ const route = useRoute()
 <template>
   <router-view :key="route.fullPath" />
 </template>
- 

@@ -16,8 +16,15 @@ const navItems = computed(
 )
 
 const userInfo = computed(() => {
-  const userInfoCookie = cookies.get('user_info')
-  return userInfoCookie ? JSON.parse(userInfoCookie) : null
+  const userCookie = cookies.get('user_info')
+  if (typeof userCookie === 'string') {
+    try {
+      return JSON.parse(userCookie)
+    } catch {
+      return null
+    }
+  }
+  return null
 })
 
 const logout = () => {
@@ -28,34 +35,33 @@ const logout = () => {
 
 <template>
   <header id="header">
+
     <h1>
       <RouterLink to="/">
         <img :src="images.logo" alt="Hy-Q" />
       </RouterLink>
     </h1>
+
     <nav id="nav">
       <ul>
-        <li
-          v-for="item in navItems"
-          :key="item.path"
-          :class="{
-            active:
-              $route.path === item.path || $route.path.includes(item.meta?.path)
-          }">
+        <li v-for="item in navItems" :key="item.path" :class="{
+          active:
+            $route.path === item.path || $route.path.includes(item.meta?.path)
+        }">
           <RouterLink :to="item.path">{{ item.meta?.title }}</RouterLink>
         </li>
       </ul>
     </nav>
+
     <div class="side">
       <div class="user-info" v-if="userInfo">
         {{ userInfo.plant_name }}
       </div>
       <div class="btn-member">
-        <a class="ico-box setting" @click="router.push('/setting/device')"
-          >설정</a
-        >
+        <a class="ico-box setting" @click="router.push('/setting/device')">설정</a>
         <a class="ico-box logout" @click="logout">로그아웃</a>
       </div>
     </div>
+
   </header>
 </template>

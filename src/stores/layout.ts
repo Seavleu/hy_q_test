@@ -2,9 +2,9 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useLayoutStore = defineStore('layout', () => {
-  const layout = ref<'LayoutPublic' | 'LayoutDefault'>('LayoutDefault')
+  const layout = ref<'PublicLayout' | 'DefaultLayout'>('DefaultLayout')
 
-  const setLayout = (newLayout: 'LayoutPublic' | 'LayoutDefault') => {
+  const setLayout = (newLayout: 'PublicLayout' | 'DefaultLayout') => {
     layout.value = newLayout
   }
 
