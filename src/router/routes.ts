@@ -1,3 +1,4 @@
+
 export const routes = [
   {
     path: '/auth',
@@ -63,7 +64,7 @@ export const routes = [
         children: [
           {
             path: '/generation/production/current',
-            component: () => import(/* webpackChunkName: "ProductionPower" */ '../views/generation/production/Index.vue'),
+            component: () => import(/* webpackChunkName: "ProductionPower" */ '../views/generation/production/Current.vue'),
             meta: {
               title: '생산전력량',
               path: 'generation/production'
@@ -87,7 +88,7 @@ export const routes = [
           },
           {
             path: '/generation/invalidity/current',
-            component: () => import(/* webpackChunkName: "InvalidityPower" */ '../views/generation/invalidity/Index.vue'),
+            component: () => import(/* webpackChunkName: "InvalidityPower" */ '../views/generation/invalidity/Current.vue'),
             meta: {
               title: '무효전력량',
               path: 'generation/invalidity'
@@ -111,7 +112,7 @@ export const routes = [
           },
           {
             path: '/generation/weather/current',
-            component: () => import(/* webpackChunkName: "Weather" */ '../views/generation/weather/Index.vue'),
+            component: () => import(/* webpackChunkName: "Weather" */ '../views/generation/weather/Current.vue'),
             meta: {
               title: '기상관측',
               path: 'generation/weather'
