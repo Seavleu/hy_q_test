@@ -42,7 +42,7 @@ export const routes = [
       }
     ]
   },
-
+  // ** 전력발전 ** //
   {
     path: '/',
     name: 'sub',
@@ -54,96 +54,269 @@ export const routes = [
         meta: { title: '전력계통도' },
       },
       {
-        path: '/generation/production/current',
-        meta: {
-          title: '전력발전',
-          path: '/generation/',
-          sideClass: 'power-plant'
-        },
+        path: '/generation',
+        name: 'power-generation',
+        meta: { title: '전력발전' },
         children: [
           {
-            path: '/generation/production/current',
-            component: () => import(/* webpackChunkName: "ProductionPower" */ '../views/generation/production/Index.vue'),
-            meta: {
-              title: '생산전력량',
-              path: 'generation/production'
-            },
-            children: [
-              {
-                path: '/generation/production/current',
-                component: () => import(/* webpackChunkName: "ProductionPowerCurrent" */ '../views/generation/production/Current.vue'),
-                meta: {
-                  title: '생산전력량 현황'
-                }
-              },
-              {
-                path: '/generation/production/chart',
-                component: () => import(/* webpackChunkName: "ProductionPowerChart" */ '../views/generation/production/Chart.vue'),
-                meta: {
-                  title: '생산전력량 차트'
-                }
-              }
-            ]
-          },
-          {
-            path: '/generation/invalidity/current',
-            component: () => import(/* webpackChunkName: "InvalidityPower" */ '../views/generation/invalidity/Index.vue'),
+            path: '/generation/invalidity',
+            component: () => import(/* webpackChunkName: "InvalidityBaseView" */ '@/views/generation/invalidity/Index.vue'),
             meta: {
               title: '무효전력량',
-              path: 'generation/invalidity'
+              tabData: [
+                { title: '현황', path: '/generation/invalidity/current' },
+                { title: '통계차트', path: '/generation/invalidity/chart' },
+              ],
             },
             children: [
               {
-                path: '/generation/invalidity/current',
-                component: () => import(/* webpackChunkName: "InvalidityCurrent" */ '../views/generation/invalidity/Current.vue'),
-                meta: {
-                  title: '무효전력량 현황'
-                }
+                path: 'current',
+                component: () => import(/* webpackChunkName: "InvalidityCurrent" */ '@/views/generation/invalidity/Current.vue'),
+                meta: { title: '현황' },
               },
               {
-                path: '/generation/invalidity/chart',
-                component: () => import(/* webpackChunkName: "InvalidityPowerChart" */ '../views/generation/invalidity/Chart.vue'),
-                meta: {
-                  title: '무효전력량 차트'
-                }
-              }
-            ]
+                path: 'chart',
+                component: () => import(/* webpackChunkName: "InvalidityChart" */ '@/views/generation/invalidity/Chart.vue'),
+                meta: { title: '통계차트' },
+              },
+            ],
           },
           {
-            path: '/generation/weather/current',
-            component: () => import(/* webpackChunkName: "Weather" */ '../views/generation/weather/Index.vue'),
+            path: '/generation/production',
+            component: () => import(/* webpackChunkName: "ProductionBaseView" */ '@/views/generation/production/Index.vue'),
+            meta: {
+              title: '생산전력량',
+              tabData: [
+                { title: '현황', path: '/generation/production/current' },
+                { title: '통계차트', path: '/generation/production/chart' },
+              ],
+            },
+            children: [
+              {
+                path: 'current',
+                component: () => import(/* webpackChunkName: "ProductionCurrent" */ '@/views/generation/production/Current.vue'),
+                meta: { title: '현황' },
+              },
+              {
+                path: 'chart',
+                component: () => import(/* webpackChunkName: "ProductionChart" */ '@/views/generation/production/Chart.vue'),
+                meta: { title: '통계차트' },
+              },
+            ],
+          },
+          {
+            path: '/generation/weather',
+            component: () => import(/* webpackChunkName: "WeatherBaseView" */ '@/views/generation/weather/Index.vue'),
             meta: {
               title: '기상관측',
-              path: 'generation/weather'
+              tabData: [
+                { title: '현황', path: '/generation/weather/current' },
+                { title: '통계차트', path: '/generation/weather/chart' },
+              ],
             },
             children: [
               {
-                path: '/generation/weather/current',
-                component: () => import(/* webpackChunkName: "WeatherCurrent" */ '../views/generation/weather/Current.vue'),
-                meta: {
-                  title: '기상관측 현황'
-                }
+                path: 'current',
+                component: () => import(/* webpackChunkName: "WeatherCurrent" */ '@/views/generation/weather/Current.vue'),
+                meta: { title: '현황' },
               },
               {
-                path: '/generation/weather/chart',
-                component: () => import(/* webpackChunkName: "WeatherPowerChart" */ '../views/generation/weather/Chart.vue'),
-                meta: {
-                  title: '기상관측 차트'
-                }
-              }
-            ]
+                path: 'chart',
+                component: () => import(/* webpackChunkName: "WeatherChart" */ '@/views/generation/weather/Chart.vue'),
+                meta: { title: '통계차트' },
+              },
+            ],
           },
           {
-            path: '/generation/generation',
-            component: () => import(/* webpackChunkName: "PowerGeneration" */ '../views/generation/forecast/Index.vue'),
+            path: '/generation/forecast',
+            component: () => import(/* webpackChunkName: "ForecastView" */ '@/views/generation/weather/Index.vue'),
             meta: {
-              title: '발전량예측'
-            }
-          }
-        ]
+              title: '기상관측',
+            },
+          },
+        ],
+      },
+
+      // ** 전력송전 ** //
+      {
+        path: '/transmit',
+        name: 'power-transmit',
+        meta: { title: '전력송전' },
+        children: [
+          {
+            path: '/transmit/rec',
+            component: () => import(/* webpackChunkName: "Rec" */ '@/views/transmit/rec/Index.vue'),
+            meta: {
+              title: '무효전력량',
+              tabData: [
+                { title: '현황', path: '/transmit/rec/current' },
+                { title: '통계차트', path: '/transmit/rec/chart' },
+              ],
+            },
+            children: [
+              {
+                path: 'current',
+                component: () => import(/* webpackChunkName: "RecCurrent" */ '@/views/transmit/rec/Current.vue'),
+                meta: { title: '현황' },
+              },
+              {
+                path: 'chart',
+                component: () => import(/* webpackChunkName: "RecChart" */ '@/views/transmit/rec/Chart.vue'),
+                meta: { title: '통계차트' },
+              },
+            ],
+          },
+          {
+            path: '/transmit/smp',
+            component: () => import(/* webpackChunkName: "Smp" */ '@/views/transmit/smp/Index.vue'),
+            meta: {
+              title: '생산전력량',
+              tabData: [
+                { title: '현황', path: '/transmit/smp/current' },
+                { title: '통계차트', path: '/transmit/smp/chart' },
+              ],
+            },
+            children: [
+              {
+                path: 'current',
+                component: () => import(/* webpackChunkName: "SmpCurrent" */ '@/views/transmit/smp/Current.vue'),
+                meta: { title: '현황' },
+              },
+              {
+                path: 'chart',
+                component: () => import(/* webpackChunkName: "SmpChart" */ '@/views/transmit/smp/Chart.vue'),
+                meta: { title: '통계차트' },
+              },
+            ],
+          },
+          {
+            path: '/transmit/trends',
+            component: () => import(/* webpackChunkName: "Trends" */ '@/views/transmit/trends/Index.vue'),
+            meta: {
+              title: 'SMP/REC 동향',
+            },
+          }, 
+        ],
+      },
+
+      // ** 장치관리 ** //
+      {
+        path: '/management',
+        name: 'device-management',
+        meta: { title: '장치관리' },
+        children: [
+          {
+            path: '/management/status',
+            component: () => import(/* webpackChunkName: "StatusManagement" */ '@/views/management/status/Index.vue'),
+            meta: {
+              title: '장치 현황',
+            },
+          },
+          {
+            path: '/management/alarm',
+            component: () => import(/* webpackChunkName: "AlarmManagement" */ '@/views/management/alarm/Index.vue'),
+            meta: {
+              title: '문제알람 이력',
+            },
+          }, 
+          {
+            path: '/management/problem',  
+            component: () => import(/* webpackChunkName: "ProblemManagement" */ '@/views/management/problem/Index.vue'),
+            meta: {
+              title: '문제조치',
+              tabData: [
+                { title: '이력', path: '/management/problem/record' },
+                { title: '등록', path: '/management/problem/registration' },
+              ],
+            },
+            children: [
+              {
+                path: 'record',
+                component: () => import(/* webpackChunkName: "ProblemRecordManagement" */ '@/views/management/problem/history/Index.vue'),
+                meta: { title: '이력' },
+              },
+              {
+                path: 'registration',
+                component: () => import(/* webpackChunkName: "ProblemRegistrationManagement" */ '@/views/management/problem/Register.vue'),
+                meta: { title: '등록' },
+              },
+            ],
+          }, 
+          {
+            path: '/management/inspect',  
+            component: () => import(/* webpackChunkName: "InspectManagement" */ '@/views/management/inspect/Index.vue'),
+            meta: {
+              title: '정기점검',
+              tabData: [
+                { title: '이력', path: '/management/inspect/record' },
+                { title: '등록', path: '/management/inspect/registration' },
+              ],
+            },
+            children: [
+              {
+                path: 'record',
+                component: () => import(/* webpackChunkName: "InspectRecordManagement" */ '@/views/management/inspect/history/Index.vue'),
+                meta: { title: '이력' },
+              },
+              {
+                path: 'registration',
+                component: () => import(/* webpackChunkName: "InspectRegistrationManagement" */ '@/views/management/inspect/Register.vue'),
+                meta: { title: '등록' },
+              },
+            ],
+          }, 
+        ],
+      },
+
+      // ** 이상징후 ** //
+      {
+        path: '/abnormal',
+        name: 'abnormalSign-detection',
+        meta: { title: '이상징후' },
+        children: [
+          {
+            path: '/abnormal/status',
+            component: () => import(/* webpackChunkName: "AbnormalStatus" */ '@/views/abnormal/Index.vue'),
+            meta: {
+              title: '이상징후',
+            },
+          },
+          {
+            path: '/abnormal/feature',
+            component: () => import(/* webpackChunkName: "AbnormalFeature" */ '@/views/abnormal/Save.vue'),
+            meta: {
+              title: 'Feature 추출',
+            },
+          },  
+        ],
+      },
+
+      // ** 보고서 ** // 
+      {
+        path: '/report',
+        name: 'report-files',
+        meta: { title: '보고서' },
+        children: [
+          {
+            path: '/report/status',
+            component: () => import(/* webpackChunkName: "StatusManagement" */ '@/views/abnormal/Index.vue'),
+            meta: {
+              title: '이상징후',
+            },
+          },
+          {
+            path: '/abnormal/feature',
+            component: () => import(/* webpackChunkName: "AlarmManagement" */ '@/views/abnormal/Save.vue'),
+            meta: {
+              title: 'Feature 추출',
+            },
+          },  
+        ],
       },
     ]
-  }, 
+  },
+
+
 ];
 
 // if (process.env.NODE_ENV !== 'production') {
