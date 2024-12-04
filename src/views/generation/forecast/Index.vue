@@ -6,4 +6,4 @@
   </div>
 </template>
 
-<style scoped lang="scss" src="./Index.scss" />
+<style scoped lang="scss" src="../Index.scss" />

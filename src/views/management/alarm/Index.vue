@@ -5,3 +5,5 @@
     <h1>alarmView</h1>
   </div>
 </template>
+
+<style scoped lang="scss" src="../Index.scss" />

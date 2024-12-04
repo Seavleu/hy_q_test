@@ -60,7 +60,7 @@ export const routes = [
         children: [
           {
             path: '/generation/invalidity',
-            component: () => import(/* webpackChunkName: "InvalidityBaseView" */ '@/views/generation/invalidity/Index.vue'),
+            component: () => import(/* webpackChunkName: "InvalidityBaseView" */ '@/components/shared/TabNav.vue'),
             meta: {
               title: '무효전력량',
               tabData: [
@@ -83,7 +83,7 @@ export const routes = [
           },
           {
             path: '/generation/production',
-            component: () => import(/* webpackChunkName: "ProductionBaseView" */ '@/views/generation/production/Index.vue'),
+            component: () => import(/* webpackChunkName: "ProductionBaseView" */ '@/components/shared/TabNav.vue'),
             meta: {
               title: '생산전력량',
               tabData: [
@@ -106,7 +106,7 @@ export const routes = [
           },
           {
             path: '/generation/weather',
-            component: () => import(/* webpackChunkName: "WeatherBaseView" */ '@/views/generation/weather/Index.vue'),
+            component: () => import(/* webpackChunkName: "WeatherBaseView" */ '@/components/shared/TabNav.vue'),
             meta: {
               title: '기상관측',
               tabData: [
@@ -129,7 +129,7 @@ export const routes = [
           },
           {
             path: '/generation/forecast',
-            component: () => import(/* webpackChunkName: "ForecastView" */ '@/views/generation/weather/Index.vue'),
+            component: () => import(/* webpackChunkName: "ForecastView" */ '@/components/shared/TabNav.vue'),
             meta: {
               title: '기상관측',
             },
@@ -145,7 +145,7 @@ export const routes = [
         children: [
           {
             path: '/transmit/rec',
-            component: () => import(/* webpackChunkName: "Rec" */ '@/views/transmit/rec/Index.vue'),
+            component: () => import(/* webpackChunkName: "Rec" */ '@/components/shared/TabNav.vue'),
             meta: {
               title: '무효전력량',
               tabData: [
@@ -168,7 +168,7 @@ export const routes = [
           },
           {
             path: '/transmit/smp',
-            component: () => import(/* webpackChunkName: "Smp" */ '@/views/transmit/smp/Index.vue'),
+            component: () => import(/* webpackChunkName: "Smp" */ '@/components/shared/TabNav.vue'),
             meta: {
               title: '생산전력량',
               tabData: [
@@ -193,9 +193,9 @@ export const routes = [
             path: '/transmit/trends',
             component: () => import(/* webpackChunkName: "Trends" */ '@/views/transmit/trends/Index.vue'),
             meta: {
-              title: 'SMP/REC 동향',
+              title: '기상관측',
             },
-          },
+          }, 
         ],
       },
 
@@ -221,7 +221,7 @@ export const routes = [
           },
           {
             path: '/management/problem',
-            component: () => import(/* webpackChunkName: "ProblemManagement" */ '@/views/management/problem/Index.vue'),
+            component: () => import(/* webpackChunkName: "ProblemManagement" */ '@/components/shared/TabNav.vue'),
             meta: {
               title: '문제조치',
               tabData: [
@@ -244,7 +244,7 @@ export const routes = [
           },
           {
             path: '/management/inspect',
-            component: () => import(/* webpackChunkName: "InspectManagement" */ '@/views/management/inspect/Index.vue'),
+            component: () => import(/* webpackChunkName: "InspectManagement" */ '@/components/shared/TabNav.vue'),
             meta: {
               title: '정기점검',
               tabData: [
