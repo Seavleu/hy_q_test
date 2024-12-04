@@ -1,0 +1,80 @@
+{
+  "title": {
+    "text": ""
+  },
+  "legend": {
+    "enabled": false
+  },
+  "series": [
+    {
+      "color": "rgba(6, 119, 222, 1)",
+      "marker": {
+        "fillColor": "#fff",
+        "lineWidth": 2,
+        "lineColor": "rgba(6, 119, 222, 1)",
+        "symbol": "circle"
+      },
+      "data": []
+    }
+  ],
+  "tooltip": {
+    "enabled": false
+  },
+  "plotOptions": {
+    "area": {
+      "fillColor": {
+        "linearGradient": {
+          "x1": 0,
+          "y1": 0,
+          "x2": 0,
+          "y2": 1
+        },
+        "stops": [
+          [0, "rgba(6, 119, 222, 1)"],
+          [1, "transparent"]
+        ]
+      }
+    },
+    "series": {
+      "dataLabels": {
+        "align": "center",
+        "padding": 10,
+        "style": {
+          "fontSize": "14px",
+          "fontWeigth": "400"
+        },
+        "enabled": true,
+        "format": "{y} %"
+      }
+    }
+  },
+  "chart": {
+    "height": "123px",
+    "marginLeft": 0,
+    "marginRight": 0,
+    "spacingLeft": 0,
+    "spacingRight": 0,
+    "backgroundColor": "rgba(0,0,0,0)"
+  },
+  "xAxis": {
+    "lineColor": "transparent",
+    "categories": [],
+    "labels": {
+      "enabled": false
+    },
+    "gridLineColor": "rgba(255, 255, 255, 0.2)",
+    "gridLineDashStyle": "ShortDash",
+    "gridLineWidth": 1
+  },
+  "yAxis": {
+    "title": "",
+    "gridLineColor": "transparent",
+    "labels": {
+      "enabled": false
+    },
+    "max": 150,
+    "min":-50,
+    "minorGridLineWidth": 0,
+    "gridLineWidth": 0
+  }
+}

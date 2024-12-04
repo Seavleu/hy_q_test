@@ -1,1 +1,0 @@
-// TODO: types for component props

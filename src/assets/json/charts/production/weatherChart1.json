@@ -1,0 +1,64 @@
+{
+  "title": {
+    "text": ""
+  },
+  "legend": {
+    "enabled": false
+  },
+  "series": [
+    {
+      "data": []
+    }
+  ],
+  "tooltip": {
+    "enabled": false
+  },
+  "chart": {
+    "type": "column",
+    "height": "150px",
+    "marginLeft": 0,
+    "marginRight": 0,
+    "spacingLeft": 0,
+    "spacingRight": 0,
+    "backgroundColor": "rgba(0,0,0,0)"
+  },
+  "plotOptions": {
+    "column": {
+      "borderRadius": "50%",
+      "borderWidth": 0,
+      "color": "rgba(6, 119, 222, 1)",
+      "pointWidth": 10
+    },
+    "series": {
+      "dataLabels": {
+        "align": "center",
+        "padding": 10,
+        "style": {
+          "fontSize": "14px",
+          "fontWeigth": "400"
+        },
+        "enabled": true,
+        "format": "{y} %"
+      }
+    }
+  },
+  "xAxis": {
+    "lineColor": "transparent",
+    "categories": [],
+    "labels": {
+      "enabled": false
+    },
+    "gridLineColor": "rgba(255, 255, 255, 0.2)",
+    "gridLineDashStyle": "ShortDash",
+    "gridLineWidth": 1
+  },
+  "yAxis": {
+    "title": "",
+    "gridLineColor": "transparent",
+    "labels": {
+      "enabled": false
+    },
+    "minorGridLineWidth": 0,
+    "gridLineWidth": 0
+  }
+}

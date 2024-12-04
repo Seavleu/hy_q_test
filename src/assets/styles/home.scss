@@ -1,0 +1,473 @@
+.main-con {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  .box {
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: linear-gradient(
+      180deg,
+      rgba(82, 111, 216, 0.04) 0%,
+      rgba(82, 111, 216, 0.15) 100%
+    );
+    box-shadow: 0 6px 18px 0 rgba(0, 0, 0, 0.05);
+    .title {
+      padding: 0 24px;
+      height: 36px;
+      display: grid;
+      align-items: center;
+      grid-template-columns: 1fr 100px;
+      background-color: #126bac;
+
+      .title-box {
+        display: flex;
+        gap: 10px;
+        p {
+          cursor: pointer;
+          font-weight: 700;
+          color: rgba($color: #fff, $alpha: 0.5);
+
+          &.active {
+            color: #fff;
+            position: relative;
+
+            &::before {
+              position: absolute;
+              content: '';
+              display: inline-block;
+              width: 100%;
+              height: 2px;
+              top: 100%;
+              background-color: #fff;
+            }
+          }
+        }
+      }
+      .rit-btn {
+        text-align: right;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: 14px;
+
+        a {
+          color: #fff;
+          font-size: 12px;
+          font-weight: 700;
+          padding-left: 14px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: row;
+          border-left: dashed 1px rgba(#fff, 0.1);
+          white-space: nowrap;
+          cursor: pointer;
+
+          &::after {
+            content: '';
+            position: relative;
+            left: 6px;
+            width: 6px;
+            height: 10px;
+            background: url('/src/assets/images/common/ico_right.png') no-repeat
+              left 0;
+          }
+
+          &:first-child {
+            padding-left: 0;
+            border-left: 0;
+          }
+
+          a:only-child {
+            justify-content: flex-end;
+            padding-left: 0;
+            border-left: 0;
+          }
+        }
+      }
+    }
+  }
+  .item-box {
+    padding: 24px 34px;
+  }
+
+  .weather {
+    ul {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 28px;
+      li {
+        position: relative;
+        display: flex;
+        align-items: center;
+        height: 79px;
+        p {
+          position: relative;
+          padding-left: 54px;
+          font-size: 16px;
+          color: #8a95aa;
+          strong {
+            color: #fff;
+            display: block;
+          }
+          &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: inline-block;
+            width: 44px;
+            height: 44px;
+            background: url('/src/assets/images/common/ico_weather.png')
+              no-repeat 0 0;
+          }
+        }
+        @for $i from 1 through 6 {
+          &:nth-child(#{$i}) {
+            p::before {
+              background-position-x: #{-1 * (($i - 1) * 64)}px;
+            }
+          }
+        }
+        &:nth-child(1) {
+          p {
+            &::before {
+              position: absolute;
+              top: 0;
+              left: -10px;
+              width: 64px;
+              background: url('/src/assets/images/common/sprite_weather.png')
+                no-repeat 0 0;
+              background-size: 150px 736px;
+            }
+          }
+          @for $i from 1 through 23 {
+            &.sky-#{$i} p::before {
+              background-position-x: #{if($i > 12, -100px, 0)};
+              background-position-y: #{if(
+                  $i > 12,
+                  -1 * (($i - 13) * 64),
+                  -1 * (($i - 1) * 64)
+                )}px;
+            }
+          }
+        }
+        &::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: -14px;
+          width: 1px;
+          height: 100%;
+          background-color: rgba(45, 58, 124, 1);
+          display: inline-block;
+        }
+        &:last-child::after {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .power-plant {
+    ul {
+      padding-bottom: 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      justify-content: center;
+      li {
+        position: relative;
+        font-size: 18px;
+        text-align: center;
+        strong {
+          position: relative;
+          padding-left: 28px;
+        }
+        &::before {
+          content: '';
+          position: absolute;
+          top: 3px;
+          left: 80px;
+          display: inline-block;
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          background-color: #80ff44;
+        }
+        &::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: -14px;
+          width: 1px;
+          height: 100%;
+          background-color: rgba(45, 58, 124, 1);
+          display: inline-block;
+        }
+        &:last-child {
+          &::after {
+            display: none;
+          }
+        }
+
+        &.active::before {
+          background-color: #80ff44;
+        }
+
+        &.error::before {
+          background-color: red;
+        }
+      }
+    }
+    p {
+      padding: 8px 0;
+      text-align: center;
+      border-radius: 15px;
+      background: rgba(0, 0, 0, 0.1);
+    }
+  }
+  .sales {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .analyze {
+    .chart-box {
+      padding-bottom: 14px;
+    }
+  }
+  .power {
+    .chart-box {
+      padding-bottom: 24px;
+    }
+
+    .doughnut-box {
+      padding-bottom: 24px;
+
+      ul {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 53px;
+
+        li {
+          position: relative;
+          height: 130px;
+          padding-top: 52px;
+          margin-bottom: 24px;
+          background: url('/src/assets/images/common/bg_doughnut2_2.png')
+            no-repeat 0 0;
+
+          &.bg1 {
+            background: url('/src/assets/images/common/bg_doughnut04.png')
+              no-repeat center;
+
+            dl {
+              dt,
+              dd {
+                color: #111111;
+              }
+              span {
+                color: rgba(17, 17, 17, 0.5);
+              }
+            }
+          }
+
+          &.bg2 {
+            background: url('/src/assets/images/common/bg_doughnut03.png')
+              no-repeat center;
+          }
+
+          dl {
+            position: relative;
+            padding-bottom: 10px;
+            text-align: center;
+
+            dt {
+              padding-bottom: 3px;
+              color: #ffffff;
+            }
+
+            dd {
+              font-size: 24px;
+              line-height: 25px;
+              font-weight: bold;
+              color: #ffffff;
+
+              span {
+                display: block;
+                font-size: 14px;
+                color: rgba(255, 255, 255, 0.5);
+              }
+            }
+          }
+
+          &::after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 238px;
+            height: 235px;
+            transition: all 1s ease-out;
+            transform: rotate(var(--doughnut-value));
+            background: url('/src/assets/images/common/ico_point1.png')
+              no-repeat 22px center;
+          }
+
+          &.vector-1::after {
+            content: '';
+            position: absolute;
+            display: inline-block;
+            top: var(--vector-top, 0);
+            left: var(--vector-left, 0);
+            transform-origin: 50% 50%;
+            transform: rotate(var(--doughnut-value));
+            transition: all 1s ease-out;
+            background: url('/src/assets/images/common/ico_point3.png')
+              no-repeat center;
+          }
+
+          &.no-vector::after {
+            background: none !important;
+          }
+
+          div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            color: #ffffff;
+
+            p {
+              padding-bottom: 3px;
+            }
+            span {
+              color: rgba(255, 255, 255, 0.5);
+            }
+          }
+
+          @for $i from 4 through 20 {
+            &:nth-child(#{$i}) {
+              display: flex;
+              align-items: flex-start;
+              position: relative;
+              height: 118px;
+              overflow: hidden;
+              padding-top: 52px;
+
+              dl {
+                .chart {
+                  margin-top: -83px;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .grid2 {
+        grid-template-columns: 1fr 1fr;
+
+        &:nth-child(1) {
+          li {
+            background: url('/src/assets/images/common/bg_doughnut2_3.png')
+              no-repeat center;
+
+            &:nth-child(2) {
+              background: url('/src/assets/images/common/bg_doughnut2_3.png')
+                no-repeat center;
+            }
+
+            &::after {
+              left: 20%;
+              width: 230px;
+              height: 245px;
+            }
+
+            dl {
+              padding-bottom: 0px;
+            }
+          }
+        }
+      }
+    }
+
+    .charge-con {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 50px;
+      margin-top: -20px;
+
+      .prev,
+      .next {
+        cursor: pointer;
+        width: 10px;
+        height: 15px;
+        z-index: 10;
+      }
+      .prev {
+        background: url('/src/assets/images/common/ico_prev.png') no-repeat
+          center/cover;
+      }
+      .next {
+        background: url('/src/assets/images/common/ico_next.png') no-repeat
+          center/cover;
+      }
+
+      .charge-box {
+        flex: 1;
+        display: flex;
+        max-width: 700px;
+        overflow: hidden;
+        .swiper-wrapper {
+          display: flex;
+          gap: 0;
+          overflow: visible;
+        }
+        .swiper-slide {
+          display: flex;
+          align-items: center;
+          max-width: 100px;
+          height: 100px;
+          box-sizing: border-box;
+          overflow: hidden;
+        }
+
+        p {
+          position: relative;
+          width: 200px;
+          height: 60px;
+          background: url('/src/assets/images/common/sprite_save02.png')
+            no-repeat -10px;
+
+          span {
+            &:first-child {
+              position: absolute;
+              top: -25px;
+              left: 50%;
+              transform: translateX(-50%);
+              font-size: 16px;
+              font-weight: 700;
+            }
+
+            &:last-child {
+              position: absolute;
+              bottom: -5px;
+              left: 50%;
+              transform: translateX(-50%);
+              font-size: 14px;
+              font-weight: 100;
+              text-wrap: nowrap;
+            }
+          }
+        }
+      }
+    }
+  }
+}
