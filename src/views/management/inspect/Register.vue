@@ -6,5 +6,5 @@
   </div>
 </template>
 
-<style scoped lang="scss" src="" />
+<style scoped lang="scss" src="@/assets/styles/generation.scss" />
 
