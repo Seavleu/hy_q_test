@@ -2,18 +2,18 @@ export const routes = [
   {
     path: '/auth',
     name: 'auth',
-    component: () => import(/* webpackChunkName: "Auth" */ '../views/auth/Index.vue'),
+    component: () => import(/* webpackChunkName: "Auth" */ '@/views/auth/Index.vue'),
     meta: { layout: 'PublicLayout', isPublic: true },
   },
   {
     path: '/',
     name: 'home',
-    component: () => import('../views/home/Index.vue'),
+    component: () => import('@/views/home/Index.vue'),
     meta: { layout: 'DefaultLayout' },
   },
   {
     path: '/setting/device',
-    component: () => import(/* webpackChunkName: "Setting" */ '../views/setting/Index.vue'),
+    component: () => import(/* webpackChunkName: "Setting" */ '@/views/setting/Index.vue'),
     meta: {
       title: '설정',
       path: '/setting'
@@ -21,21 +21,21 @@ export const routes = [
     children: [
       {
         path: '/setting/device',
-        component: () => import(/* webpackChunkName: "SettingDevice" */ '../views/setting/Device.vue'),
+        component: () => import(/* webpackChunkName: "SettingDevice" */ '@/views/setting/Device.vue'),
         meta: {
           title: '장비알람설정'
         }
       },
       {
         path: '/setting/notification',
-        component: () => import(/* webpackChunkName: "SettingNotification" */ '../views/setting/Device.vue'),
+        component: () => import(/* webpackChunkName: "SettingNotification" */ '@/views/setting/Device.vue'),
         meta: {
           title: '알림수신자설정'
         }
       },
       {
         path: '/setting/manager',
-        component: () => import(/* webpackChunkName: "SettingManager" */ '../views/setting/Device.vue'),
+        component: () => import(/* webpackChunkName: "SettingManager" */ '@/views/setting/Device.vue'),
         meta: {
           title: '담당자설정'
         }
@@ -50,7 +50,7 @@ export const routes = [
       {
         path: '/schematic',
         name: 'schematic',
-        component: () => import(/* webpackChunkName: "Schematic" */ '../views/schematic/Index.vue'),
+        component: () => import(/* webpackChunkName: "Schematic" */ '@/views/schematic/Index.vue'),
         meta: { title: '전력계통도' },
       },
       {
@@ -195,7 +195,7 @@ export const routes = [
             meta: {
               title: 'SMP/REC 동향',
             },
-          }, 
+          },
         ],
       },
 
@@ -218,9 +218,9 @@ export const routes = [
             meta: {
               title: '문제알람 이력',
             },
-          }, 
+          },
           {
-            path: '/management/problem',  
+            path: '/management/problem',
             component: () => import(/* webpackChunkName: "ProblemManagement" */ '@/views/management/problem/Index.vue'),
             meta: {
               title: '문제조치',
@@ -241,9 +241,9 @@ export const routes = [
                 meta: { title: '등록' },
               },
             ],
-          }, 
+          },
           {
-            path: '/management/inspect',  
+            path: '/management/inspect',
             component: () => import(/* webpackChunkName: "InspectManagement" */ '@/views/management/inspect/Index.vue'),
             meta: {
               title: '정기점검',
@@ -264,7 +264,7 @@ export const routes = [
                 meta: { title: '등록' },
               },
             ],
-          }, 
+          },
         ],
       },
 
@@ -273,22 +273,6 @@ export const routes = [
         path: '/abnormal',
         name: 'abnormalSign-detection',
         meta: { title: '이상징후' },
-        children: [
-          {
-            path: '/abnormal/status',
-            component: () => import(/* webpackChunkName: "AbnormalStatus" */ '@/views/abnormal/Index.vue'),
-            meta: {
-              title: '이상징후',
-            },
-          },
-          {
-            path: '/abnormal/feature',
-            component: () => import(/* webpackChunkName: "AbnormalFeature" */ '@/views/abnormal/Save.vue'),
-            meta: {
-              title: 'Feature 추출',
-            },
-          },  
-        ],
       },
 
       // ** 보고서 ** // 
@@ -296,27 +280,9 @@ export const routes = [
         path: '/report',
         name: 'report-files',
         meta: { title: '보고서' },
-        children: [
-          {
-            path: '/report/status',
-            component: () => import(/* webpackChunkName: "StatusManagement" */ '@/views/abnormal/Index.vue'),
-            meta: {
-              title: '이상징후',
-            },
-          },
-          {
-            path: '/abnormal/feature',
-            component: () => import(/* webpackChunkName: "AlarmManagement" */ '@/views/abnormal/Save.vue'),
-            meta: {
-              title: 'Feature 추출',
-            },
-          },  
-        ],
       },
     ]
   },
-
-
 ];
 
 // if (process.env.NODE_ENV !== 'production') {
@@ -324,7 +290,7 @@ export const routes = [
 //   //     {
 //   //         name: 'DevPage',
 //   //         path: '/devPage',
-//   //         component: import(/* webpackChunkName: "DevPage" */ '../views/devBox/DevPage.vue'),
+//   //         component: import(/* webpackChunkName: "DevPage" */ '@/views/devBox/DevPage.vue'),
 //   //         meta: {
 //   //             requireAuth: false
 //   //         }
