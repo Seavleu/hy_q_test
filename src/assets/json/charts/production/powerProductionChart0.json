@@ -1,0 +1,76 @@
+{
+  "title": {
+    "text": ""
+  }, 
+  "legend": {
+    "align": "right",               
+    "verticalAlign": "top",   
+    "itemStyle": { "color": "#8A95AA", "fontSize": "14px"}
+  },
+  "series": [
+    {
+      "name": "인버터 발전량",
+      "color": "#F26933",
+      "marker": { "enabled": false },
+      "data": []
+    },
+    {
+      "name": "생산효율",
+      "color": "#04C697",
+      "marker": { "enabled": false },
+      "data": []
+    }        
+  ], 
+  "chart": {
+    "height": "200px", 
+    "spacingLeft": 0,
+    "spacingRight": 0,
+    "backgroundColor": "rgba(0,0,0,0)"
+  },
+  "plotOptions": {
+    "spline": {
+      "lineWidth": 4,
+      "states": { "hover": { "lineWidth": 5 } },
+      "marker": { "enabled": false }
+    }
+  },
+  "xAxis": {
+    "categories": [],
+    "lineColor": "#525A84",
+    "labels": { "style": { "color": "#fff" } }
+  },
+  "yAxis": [
+  {
+    "title": {
+      "text": "발전량",   
+      "align": "middle",    
+      "style": { "color": "#8A95AA", "fontSize": "14px" }
+    },
+    "min": 0,
+    "max": 200,
+    "tickInterval": 50,
+    "labels": { 
+      "style": { "color": "#ffffff", "fontSize": "12px" },
+      "format": "{value}kW" 
+    },
+    "gridLineColor": "rgba(82, 90, 132, 0.5)",
+    "gridLineDashStyle": "ShortDash"
+  },
+  {
+    "opposite": true,
+    "title": {
+      "text": "비율",   
+      "align": "middle",   
+      "style": { "color": "#8A95AA", "fontSize": "14px" }
+    },
+    "min": 0,
+    "max": 200,
+    "tickInterval": 50,
+    "labels": { 
+      "style": { "color": "#ffffff", "fontSize": "12px" }, 
+      "format": "{value}kW" 
+    },
+    "gridLineWidth": 0
+  }
+]
+}

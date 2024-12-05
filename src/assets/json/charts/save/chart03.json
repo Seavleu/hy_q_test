@@ -1,0 +1,77 @@
+{
+  "title": {
+    "text": ""
+  },
+  "subtitle": {
+    "text": "전력",
+    "align": "left",
+    "style": {
+      "fontSize": "14px",
+      "color": "#8A95AA"
+    }
+  },
+  "series": [
+    {
+      "name": "",
+      "color": "#0677DE",
+      "data": [0, 0, 0, 0, 0, 0, 15, 30, 45, 60, 75, { "y": 100, "marker": { "enabled": true, "symbol": "circle" } }]
+    }
+  ],
+  "plotOptions": {
+    "series": {
+      "lineWidth": 3,
+      "shadow": true,
+
+      "marker": {
+        "enabled": false,
+        "symbol": "circle",
+        "fillColor": "#fff",
+        "lineWidth": 2,
+        "lineColor": "#0677DE",
+        "states": {
+          "hover": {
+            "enabled": true
+          }
+        }
+      }
+    }
+  },
+  "legend": {
+    "enabled": false
+  },
+  "chart": {
+    "height": "150px",
+    "spacingLeft": 0,
+    "spacingRight": 0,
+    "backgroundColor": "rgba(0,0,0,0)"
+  },
+  "xAxis": {
+    "categories": ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00"],
+    "lineColor": "#525A84",
+    "labels": {
+      "style": {
+        "color": "#fff"
+      }
+    }
+  },
+  "yAxis": [
+    {
+      "title": {
+        "text": "",
+        "x": -20
+      },
+      "min": 0,
+      "max": 200,
+      "tickPixelInterval": 10,
+      "labels": {
+        "format": "{text}kW",
+        "style": {
+          "color": "#fff",
+          "fontSize": "12px"
+        }
+      },
+      "gridLineColor": "rgba(82, 90, 132, 0.5)",
+      "gridLineDashStyle": "ShortDash"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "title": {
+    "text": ""
+  }, 
+  "legend": {
+    "align": "left",               
+    "verticalAlign": "top",
+    "itemStyle": { "color": "#8A95AA", "fontSize": "14px" }
+  },
+  "series": [
+    {
+      "name": "발전량",
+      "color": "#F26933",
+      "marker": {
+        "fillColor": "#fff",
+        "lineWidth": 2,
+        "lineColor": "#F26933",
+        "symbol": "circle"
+      },
+      "data": []
+    },
+    {
+      "name": "생산효율",
+      "color": "#04C697",
+      "marker": {
+        "fillColor": "#fff",
+        "lineWidth": 2,
+        "lineColor": "#04C697",
+        "symbol": "circle"
+      },
+      "data": []
+    }        
+  ], 
+  "chart": {
+    "height": "200px",
+    "spacingLeft": 0,
+    "spacingRight": 0,
+    "backgroundColor": "rgba(0,0,0,0)"
+  },
+  "plotOptions": {
+    "spline": {
+      "lineWidth": 4,
+      "states": { "hover": { "lineWidth": 5 } },
+      "marker": { "enabled": false }
+    }
+  },
+  "xAxis": {
+    "categories": [],
+    "lineColor": "#525A84",
+    "labels": { "style": { "color": "#fff" } }
+  },
+  "yAxis": [
+    {
+      "title": {
+        "text": "발전량(kWh)",   
+        "align": "middle",   
+        "style": { "color": "#8A95AA", "fontSize": "14px" }
+      },
+      "min": 0,
+      "max": 200,
+      "tickInterval": 50,
+      "labels": { "style": { "color": "#8A95AA", "fontSize": "12px" } },
+      "gridLineColor": "rgba(82, 90, 132, 0.5)",
+      "gridLineDashStyle": "ShortDash"
+    },
+    {
+      "opposite": true,
+      "title": {
+        "text": "비율(%)",   
+        "align": "middle",   
+        "style": { "color": "#8A95AA", "fontSize": "14px" }
+      },
+      "min": 0,
+      "max": 80, 
+      "tickInterval": 20,
+      "labels": { "style": { "color": "#8A95AA", "fontSize": "12px" } },
+      "gridLineWidth": 0
+    }
+  ]
+}

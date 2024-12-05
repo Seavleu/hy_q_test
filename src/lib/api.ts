@@ -1,10 +1,16 @@
 import axios from '@/lib/axios'
-import type { LoginRequest, AutoLogin, productionChart, InvalidCurrent, InvalidChart, weatherCurrent, weatherChart } from '@/types/api';
+import type { LoginRequest, AutoLogin, productionChart, InvalidCurrent, InvalidChart, weatherCurrent, weatherChart, HomeCurrentData } from '@/types/api';
 
 export const AUTH_API = {
     login: (data: LoginRequest) => axios.post("/api/login/auth", data),
     autoLogin: (data: AutoLogin) => axios.post("/api/login/authAuto", data),
 };
+
+export const HOME_API = {
+    fetchHomeData: (plantSeq: number) => axios.get<HomeCurrentData>(`/api/home/current/hyq`, {
+        params: { plant_seq: plantSeq },
+    }),
+}
 
 export const GENERATION_API = {
     productionChart: (data: productionChart) => axios.get("/api/powergen/stats/hyq", { params: data }),

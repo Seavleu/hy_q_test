@@ -1,0 +1,72 @@
+{
+  "title": {
+    "text": ""
+  },
+
+  "series": [
+    {
+      "name": "",
+      "color": "#F26933",
+      "data": [0, 30, 20, 50, 60, 20, { "y": 50, "marker": { "enabled": true, "symbol": "circle" } }]
+    }
+  ],
+  "plotOptions": {
+    "series": {
+      "lineWidth": 3,
+      "shadow": true,
+      "marker": {
+        "enabled": false,
+        "symbol": "circle",
+        "fillColor": "#fff",
+        "lineWidth": 2,
+        "lineColor": "#F26933",
+        "states": {
+          "hover": {
+            "enabled": true
+          }
+        }
+      }
+    }
+  },
+  "legend": {
+    "enabled": false
+  },
+  "chart": {
+    "height": "333px",
+    "spacingLeft": 10,
+    "spacingRight": 0,
+    "backgroundColor": "rgba(0,0,0,0)"
+  },
+  "xAxis": {
+    "categories": ["17일", "18일", "19일", "20일", "21일", "22일", "23일"],
+    "lineColor": "#525A84",
+    "labels": {
+      "style": {
+        "color": "#fff"
+      }
+    }
+  },
+  "yAxis": [
+    {
+      "title": {
+        "text": "전력량(kWh)",
+        "x": -10,
+        "style": {
+          "color": "#8A95AA",
+          "fontSize": "12px"
+        }
+      },
+      "min": 0,
+      "max": 200,
+      "tickPixelInterval": 100,
+      "labels": {
+        "style": {
+          "color": "#8A95AA",
+          "fontSize": "12px"
+        }
+      },
+      "gridLineColor": "rgba(82, 90, 132, 0.5)",
+      "gridLineDashStyle": "ShortDash"
+    }
+  ]
+}
