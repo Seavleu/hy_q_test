@@ -5,10 +5,11 @@ import IncomeChartJson from '@/assets/json/charts/main/IncomeChart.json'
 import powerTransmissionChartJson from '@/assets/json/charts/main/powerTransmissionChart.json'
 import improvementChartJson from '@/assets/json/charts/main/improvementChart.json'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import ProtractorChart from "@/components/shared/ProtractorChart.vue"
+import ProtractorChart from '@/components/shared/ProtractorChart.vue'
 import { returnToLocaleString, formatTime } from '@/utils/format'
 import moment from 'moment'
 import type { HomeCurrentData } from '@/types/api'
+import { HOME_API } from '@/lib/api'
 
 const data = ref<HomeCurrentData | null>(null)
 const racks = ref<Array<any>>([])
@@ -22,14 +23,13 @@ const swiperIdx = ref<any>(null)
 
 const getHomeCurrent = async () => {
   try {
-    const response = await fetch(`/api/home/current/hyq?plant_seq=${2}`)
-    const result: HomeCurrentData = await response.json()
-    data.value = result
+    const res = await HOME_API.fetchHomeData(2)
+    data.value = res.data
 
     initChart()
     setChart()
   } catch (error) {
-    console.error('Error in getHomeCurrent:', error)
+    console.error('Error in fetching home data:', error)
   }
 }
 
@@ -43,13 +43,15 @@ const initChart = () => {
   powerTransChart.value.xAxis.categories = []
 }
 const setChart = () => {
-  data.sales_info.graph_data_list.forEach((V) => {
+  data.value?.sales_info?.graph_data_list.forEach((V) => {
     salesChart.value.series[0].data.push(V.smp_ttl || 0)
     salesChart.value.series[1].data.push(V.rec_ttl || 0)
-    salesChart.value.xAxis.categories.push(`${V.date_month.slice(0, 4)}-${V.date_month.slice(4, 6)}`)
+    salesChart.value.xAxis.categories.push(
+      `${V.date_month.slice(0, 4)}-${V.date_month.slice(4, 6)}`
+    )
   })
 
-  data.today_power_transfer_info.graph_trans_list.forEach((V) => {
+  data.value?.today_power_transfer_info?.graph_trans_list.forEach((V) => {
     powerTransChart.value.series[0].data.push(V.hourly_trans_kwh || '-')
     powerTransChart.value.series[1].data.push(V.hourly_invalid_kwh || '-')
     powerTransChart.value.xAxis.categories.push(V.time_hour || '-')
@@ -59,7 +61,7 @@ const setChart = () => {
 const getRackStyle = (rack: { kWh: number }) => {
   const posY = getBgPosition(rack.kWh)
   return {
-    backgroundPosition: `-10px ${posY}px`,
+    backgroundPosition: `-10px ${posY}px`
   }
 }
 
@@ -89,15 +91,19 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="main-con">
+  <div class="home-con">
     <div class="box">
       <div class="title">
         <p>
-          <strong>오늘의 기상정보</strong> ({{ data?.weather_info.area_name || '정보 없음' }})
-          {{ moment(
-            `${data?.weather_info.base_date || ''}${data?.weather_info.base_time || ''}`,
-            'YYYYMMDDHHmm'
-          ).format('YYYY년 MM월 DD일 HH:mm') }}
+          <strong>오늘의 기상정보</strong> ({{
+            data?.weather_info.area_name || '정보 없음'
+          }})
+          {{
+            moment(
+              `${data?.weather_info.base_date || ''}${data?.weather_info.base_time || ''}`,
+              'YYYYMMDDHHmm'
+            ).format('YYYY년 MM월 DD일 HH:mm')
+          }}
         </p>
         <div class="rit-btn">
           <RouterLink to="/powerPlant/weather/chart">기상통계</RouterLink>
@@ -105,10 +111,12 @@ onMounted(() => {
       </div>
       <div class="item-box weather">
         <ul>
-          <li :class="'sky-' + (data?.weather_info.sky)">
+          <li :class="'sky-' + data?.weather_info.sky">
             <p>
               {{ data?.weather_info.sky_desc || '정보 없음' }}
-              <strong>{{ returnToLocaleString(data?.weather_info.t1h) }}℃</strong>
+              <strong
+                >{{ returnToLocaleString(data?.weather_info.t1h) }}℃</strong
+              >
             </p>
           </li>
           <li>
@@ -118,12 +126,18 @@ onMounted(() => {
           </li>
           <li>
             <p>
-              습도 <strong>{{ returnToLocaleString(data?.weather_info.reh) }}%</strong>
+              습도
+              <strong
+                >{{ returnToLocaleString(data?.weather_info.reh) }}%</strong
+              >
             </p>
           </li>
           <li>
             <p>
-              바람 <strong>{{ returnToLocaleString(data?.weather_info.wsd) }}m/s</strong>
+              바람
+              <strong
+                >{{ returnToLocaleString(data?.weather_info.wsd) }}m/s</strong
+              >
             </p>
           </li>
           <li>
@@ -150,19 +164,31 @@ onMounted(() => {
       </div>
       <div class="item-box power-plant">
         <ul>
-          <li :class="data?.device_status.inverter_data_status === 'false' ? 'error' : 'active'">
+          <li
+            :class="
+              data?.device_status.inverter_data_status === 'false'
+                ? 'error'
+                : 'active'
+            ">
             <strong>전력발전</strong>
           </li>
-          <li :class="data?.device_status.system_data_status ? 'active' : 'error'">
+          <li
+            :class="
+              data?.device_status.system_data_status ? 'active' : 'error'
+            ">
             <strong>전력송전</strong>
           </li>
-          <li :class="data?.device_status.device_data_status ? 'active' : 'error'">
+          <li
+            :class="
+              data?.device_status.device_data_status ? 'active' : 'error'
+            ">
             <strong>전력저장</strong>
           </li>
         </ul>
         <p>
           {{
-            data?.device_status?.error_message?.length && data.device_status.error_message.length > 0
+            data?.device_status?.error_message?.length &&
+            data.device_status.error_message.length > 0
               ? data.device_status.error_message[0]
               : '모든 장치가 정상동작하고 있습니다.'
           }}
@@ -173,7 +199,8 @@ onMounted(() => {
     <div class="box">
       <div class="title">
         <div class="title-box">
-          <p :class="{ active: isShow1 === 0 }" @click="isShow1 = 0"><strong>매출 분석</strong></p>
+          <p style="color: #fff"><strong>매출 분석</strong></p>
+          <!-- <p :class="{ active: isShow1 === 0 }" @click="isShow1 = 0"><strong>매출 분석</strong></p> -->
           <!-- <p :class="{ active: isShow1 === 1 }" @click="isShow1 = 1"><strong>손익분기</strong></p> -->
         </div>
         <div class="rit-btn">
@@ -207,28 +234,58 @@ onMounted(() => {
               <tr>
                 <th>오늘</th>
                 <td class="right">
-                  {{ returnToLocaleString(data?.sales_info.sell_price_info_list?.[0].smp_sell_total_price) }}
+                  {{
+                    returnToLocaleString(
+                      data?.sales_info.sell_price_info_list?.[0]
+                        .smp_sell_total_price
+                    )
+                  }}
                 </td>
                 <td class="right">
-                  {{ returnToLocaleString(data?.sales_info.sell_price_info_list?.[0]?.rec_sell_total_price) }}
+                  {{
+                    returnToLocaleString(
+                      data?.sales_info.sell_price_info_list?.[0]
+                        ?.rec_sell_total_price
+                    )
+                  }}
                 </td>
               </tr>
               <tr>
                 <th>이번 달</th>
                 <td class="right">
-                  {{ returnToLocaleString(data?.sales_info.sell_price_info_list?.[1].smp_sell_total_price) }}
+                  {{
+                    returnToLocaleString(
+                      data?.sales_info.sell_price_info_list?.[1]
+                        .smp_sell_total_price
+                    )
+                  }}
                 </td>
                 <td class="right">
-                  {{ returnToLocaleString(data?.sales_info.sell_price_info_list?.[1].rec_sell_total_price) }}
+                  {{
+                    returnToLocaleString(
+                      data?.sales_info.sell_price_info_list?.[1]
+                        .rec_sell_total_price
+                    )
+                  }}
                 </td>
               </tr>
               <tr>
                 <th>누적</th>
                 <td class="right">
-                  {{ returnToLocaleString(data?.sales_info.sell_price_info_list?.[2].smp_sell_total_price) }}
+                  {{
+                    returnToLocaleString(
+                      data?.sales_info.sell_price_info_list?.[2]
+                        .smp_sell_total_price
+                    )
+                  }}
                 </td>
                 <td class="right">
-                  {{ returnToLocaleString(data?.sales_info.sell_price_info_list?.[2].rec_sell_total_price) }}
+                  {{
+                    returnToLocaleString(
+                      data?.sales_info.sell_price_info_list?.[2]
+                        .rec_sell_total_price
+                    )
+                  }}
                 </td>
               </tr>
             </tbody>
@@ -285,11 +342,14 @@ onMounted(() => {
     <div class="box">
       <div class="title">
         <div class="title-box">
-          <p :class="{ active: isShow2 === 0 }" @click="isShow2 = 0"><strong>충전 현황</strong></p>
+          <p style="color: #fff"><strong>충전 현황</strong></p>
+          <!-- <p :class="{ active: isShow2 === 0 }" @click="isShow2 = 0"><strong>충전 현황</strong></p> -->
           <!-- <p :class="{ active: isShow2 === 1 }" @click="isShow2 = 1"><strong>방전 현황</strong></p> -->
         </div>
         <div class="rit-btn">
-          <a v-if="isShow2 === 0" href="powerPlant/production/current">충전현황</a>
+          <a v-if="isShow2 === 0" href="powerPlant/production/current"
+            >충전현황</a
+          >
           <a v-if="isShow2 === 1">방전현황</a>
         </div>
       </div>
@@ -297,21 +357,34 @@ onMounted(() => {
       <div class="item-box power" v-if="isShow2 === 0">
         <div class="doughnut-box">
           <ul class="grid2">
-            <li :style="{ '--doughnut-value': `${(data?.today_powergen_info.today_power_gen || 0) * 1.8}deg` }">
+            <li
+              :style="{
+                '--doughnut-value': `${(data?.today_powergen_info.today_power_gen || 0) * 1.8}deg`
+              }">
               <dl>
                 <dt>배터리로 충전되는 전력</dt>
                 <dd>
-                  {{ returnToLocaleString(data?.today_powergen_info.today_power_gen) }}
+                  {{
+                    returnToLocaleString(
+                      data?.today_powergen_info.today_power_gen
+                    )
+                  }}
                   <span>kW</span>
                 </dd>
               </dl>
             </li>
             <li
-              :style="{ '--doughnut-value': `${(data?.today_powergen_info.total_power_gen.total_power_gen || 0) * 1.8}deg` }">
+              :style="{
+                '--doughnut-value': `${(data?.today_powergen_info.total_power_gen.total_power_gen || 0) * 1.8}deg`
+              }">
               <dl>
                 <dt>누적 충전량</dt>
                 <dd>
-                  {{ returnToLocaleString(data?.today_powergen_info.total_power_gen.total_power_gen) }}
+                  {{
+                    returnToLocaleString(
+                      data?.today_powergen_info.total_power_gen.total_power_gen
+                    )
+                  }}
                   <span>kWh</span>
                 </dd>
               </dl>
@@ -322,12 +395,22 @@ onMounted(() => {
         <div class="charge-con">
           <p class="prev" @click="slidePrev"></p>
           <div class="charge-box">
-            <Swiper :slides-per-view="5" :space-between="34" :navigation="{ prevEl: '.prev', nextEl: '.next' }"
-              :free-mode="true" @swiper="swiperRef">
-              <SwiperSlide v-for="(item, idx) in data?.today_powergen_info.graph_gen_list.map((item, i) => ({
-                kWh: ((item.hourly_kwh / 50) * 100).toFixed(0),
-                rack: i + 1,
-              }))" :key="idx">
+            <Swiper
+              :slides-per-view="5"
+              :space-between="34"
+              :navigation="{ prevEl: '.prev', nextEl: '.next' }"
+              :free-mode="true"
+              @swiper="swiperRef">
+              <SwiperSlide
+                v-for="(
+                  item, idx
+                ) in data?.today_powergen_info.graph_gen_list.map(
+                  (item, i) => ({
+                    kWh: ((item.hourly_kwh / 50) * 100).toFixed(0),
+                    rack: i + 1
+                  })
+                )"
+                :key="idx">
                 <p :style="getRackStyle(item)">
                   <span>{{ `렉 ${item.rack}` }}</span>
                   <span>{{ `50kWh ${item.kWh}% 충전` }}</span>
@@ -338,8 +421,7 @@ onMounted(() => {
           <p class="next" @click="slideNext"></p>
         </div>
       </div>
-      <div class="item-box analyze" v-if="isShow2 === 1">
-      </div>
+      <div class="item-box analyze" v-if="isShow2 === 1"></div>
     </div>
 
     <div class="box">
@@ -353,79 +435,138 @@ onMounted(() => {
       <div class="item-box power">
         <div class="doughnut-box">
           <ul>
-            <li :class="['bg1', 'vector-1']"
-              :style="{ '--doughnut-value': `${(data?.current_device_info.current_power || 0) * 1.8}deg`, 'padding-top': '40px' }">
+            <li
+              :class="['bg1', 'vector-1']"
+              :style="{
+                '--doughnut-value': `${(data?.current_device_info.current_power || 0) * 1.8}deg`,
+                'padding-top': '40px'
+              }">
               <dl>
                 <dt>생산 전력</dt>
                 <dd>
-                  {{ returnToLocaleString(data?.current_device_info.current_power || 0) }}
+                  {{
+                    returnToLocaleString(
+                      data?.current_device_info.current_power || 0
+                    )
+                  }}
                   <span>kW</span>
                 </dd>
               </dl>
             </li>
-            <li :class="['bg1', 'vector-1']"
-              :style="{ '--doughnut-value': `${((data?.current_device_info.current_v || 0) / 500) * 100 * 1.8}deg`, 'padding-top': '40px' }">
+            <li
+              :class="['bg1', 'vector-1']"
+              :style="{
+                '--doughnut-value': `${((data?.current_device_info.current_v || 0) / 500) * 100 * 1.8}deg`,
+                'padding-top': '40px'
+              }">
               <dl>
                 <dt>전압</dt>
                 <dd>
-                  {{ returnToLocaleString(data?.current_device_info.current_v || 0) }}
+                  {{
+                    returnToLocaleString(
+                      data?.current_device_info.current_v || 0
+                    )
+                  }}
                   <span>V</span>
                 </dd>
               </dl>
             </li>
-            <li :class="['bg1', 'vector-1']"
-              :style="{ '--doughnut-value': `${(data?.current_device_info.current_a || 0) * 1.8}deg`, 'padding-top': '40px' }">
+            <li
+              :class="['bg1', 'vector-1']"
+              :style="{
+                '--doughnut-value': `${(data?.current_device_info.current_a || 0) * 1.8}deg`,
+                'padding-top': '40px'
+              }">
               <dl>
                 <dt>전류</dt>
                 <dd>
-                  {{ returnToLocaleString(data?.current_device_info.current_a || 0) }}
+                  {{
+                    returnToLocaleString(
+                      data?.current_device_info.current_a || 0
+                    )
+                  }}
                   <span>A</span>
                 </dd>
               </dl>
             </li>
             <li :class="['bg2', 'no-vector']">
               <dl>
-                <ProtractorChart class="chart"
-                  :value="returnToLocaleString(data?.current_device_info.r_coil_temp || '0')" title="R 코일 온도"
+                <ProtractorChart
+                  class="chart"
+                  :value="
+                    returnToLocaleString(
+                      data?.current_device_info.r_coil_temp || '0'
+                    )
+                  "
+                  title="R 코일 온도"
                   unit="℃" />
               </dl>
             </li>
             <li :class="['bg2', 'no-vector']">
               <dl>
-                <ProtractorChart class="chart"
-                  :value="returnToLocaleString(data?.current_device_info.s_coil_temp || '0')" title="S 코일 온도"
+                <ProtractorChart
+                  class="chart"
+                  :value="
+                    returnToLocaleString(
+                      data?.current_device_info.s_coil_temp || '0'
+                    )
+                  "
+                  title="S 코일 온도"
                   unit="℃" />
               </dl>
             </li>
             <li :class="['bg2', 'no-vector']">
               <dl>
-                <ProtractorChart class="chart"
-                  :value="returnToLocaleString(data?.current_device_info.t_coil_temp || '0')" title="T 코일 온도"
+                <ProtractorChart
+                  class="chart"
+                  :value="
+                    returnToLocaleString(
+                      data?.current_device_info.t_coil_temp || '0'
+                    )
+                  "
+                  title="T 코일 온도"
                   unit="℃" />
               </dl>
             </li>
             <li :class="['bg2', 'no-vector']">
               <dl>
-                <ProtractorChart class="chart"
-                  :value="returnToLocaleString(data?.current_device_info.back_bearing_temp || '0')" title="위 베어링 온도"
+                <ProtractorChart
+                  class="chart"
+                  :value="
+                    returnToLocaleString(
+                      data?.current_device_info.back_bearing_temp || '0'
+                    )
+                  "
+                  title="위 베어링 온도"
                   unit="℃" />
               </dl>
             </li>
             <li :class="['bg2', 'no-vector']">
               <dl>
-                <ProtractorChart class="chart"
-                  :value="returnToLocaleString(data?.current_device_info.front_bearing_temp || '0')" title="앞 베어링 온도"
+                <ProtractorChart
+                  class="chart"
+                  :value="
+                    returnToLocaleString(
+                      data?.current_device_info.front_bearing_temp || '0'
+                    )
+                  "
+                  title="앞 베어링 온도"
                   unit="℃" />
               </dl>
             </li>
             <li :class="['bg2', 'no-vector']">
               <dl>
-                <ProtractorChart class="chart"
-                  :value="returnToLocaleString(data?.current_device_info.front_bearing_temp || '-')" title="뒤 베어링 온도"
+                <ProtractorChart
+                  class="chart"
+                  :value="
+                    returnToLocaleString(
+                      data?.current_device_info.front_bearing_temp || '-'
+                    )
+                  "
+                  title="뒤 베어링 온도"
                   unit="℃" />
               </dl>
             </li>
-
           </ul>
         </div>
       </div>
@@ -443,46 +584,83 @@ onMounted(() => {
         <div class="doughnut-box">
           <ul>
             <li
-              :style="{ '--doughnut-value': `${(data?.today_power_transfer_info.today_transfer_power || 0) * 1.8}deg` }">
+              :style="{
+                '--doughnut-value': `${(data?.today_power_transfer_info.today_transfer_power || 0) * 1.8}deg`
+              }">
               <dl>
                 <dt>오늘 인버터 송전량</dt>
                 <dd>
-                  {{ returnToLocaleString(data?.today_power_transfer_info.today_transfer_power || 0) }}
+                  {{
+                    returnToLocaleString(
+                      data?.today_power_transfer_info.today_transfer_power || 0
+                    )
+                  }}
                   <span>kWh</span>
                 </dd>
               </dl>
               <div>
                 <p>어제 인버터 송전량</p>
-                <span>{{ returnToLocaleString(data?.today_power_transfer_info.yesterday_transfer_power || 0)
-                  }}kWh</span>
+                <span
+                  >{{
+                    returnToLocaleString(
+                      data?.today_power_transfer_info
+                        .yesterday_transfer_power || 0
+                    )
+                  }}kWh</span
+                >
               </div>
             </li>
             <li
-              :style="{ '--doughnut-value': `${(data?.today_power_transfer_info.today_invalid_power || 0) * 1.8}deg` }">
+              :style="{
+                '--doughnut-value': `${(data?.today_power_transfer_info.today_invalid_power || 0) * 1.8}deg`
+              }">
               <dl>
                 <dt>오늘 무효전력량</dt>
                 <dd>
-                  {{ returnToLocaleString(data?.today_power_transfer_info.today_invalid_power || 0) }}
+                  {{
+                    returnToLocaleString(
+                      data?.today_power_transfer_info.today_invalid_power || 0
+                    )
+                  }}
                   <span>kWh</span>
                 </dd>
               </dl>
               <div>
                 <p>어제 무효전력량</p>
-                <span>{{ returnToLocaleString(data?.today_power_transfer_info.yesterday_invalid_power || 0)
-                  }}kWh</span>
+                <span
+                  >{{
+                    returnToLocaleString(
+                      data?.today_power_transfer_info.yesterday_invalid_power ||
+                        0
+                    )
+                  }}kWh</span
+                >
               </div>
             </li>
-            <li :style="{ '--doughnut-value': `${(data?.today_power_transfer_info.today_trans_per || 0) * 1.8}deg` }">
+            <li
+              :style="{
+                '--doughnut-value': `${(data?.today_power_transfer_info.today_trans_per || 0) * 1.8}deg`
+              }">
               <dl>
                 <dt>오늘 AC/AC 변환율</dt>
                 <dd>
-                  {{ returnToLocaleString(data?.today_power_transfer_info.today_trans_per || 0) }}
+                  {{
+                    returnToLocaleString(
+                      data?.today_power_transfer_info.today_trans_per || 0
+                    )
+                  }}
                   <span>%</span>
                 </dd>
               </dl>
               <div>
                 <p>어제 AC/AC 변환율</p>
-                <span>{{ returnToLocaleString(data?.today_power_transfer_info.yesterday_trans_per || 0) }}%</span>
+                <span
+                  >{{
+                    returnToLocaleString(
+                      data?.today_power_transfer_info.yesterday_trans_per || 0
+                    )
+                  }}%</span
+                >
               </div>
             </li>
           </ul>
@@ -512,9 +690,18 @@ onMounted(() => {
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(V, idx) in data?.today_power_transfer_info.today_power_transfer_dately_info_list || []"
+              <tr
+                v-for="(V, idx) in data?.today_power_transfer_info
+                  .today_power_transfer_dately_info_list || []"
                 :key="V.date_type"
-                :style="idx === (data?.today_power_transfer_info.today_power_transfer_dately_info_list.length || 0) - 1 ? 'font-weight: bold;' : ''">
+                :style="
+                  idx ===
+                  (data?.today_power_transfer_info
+                    .today_power_transfer_dately_info_list.length || 0) -
+                    1
+                    ? 'font-weight: bold;'
+                    : ''
+                ">
                 <td>{{ V.date_name }}</td>
                 <td>{{ returnToLocaleString(V.transfer_power || 0) }}</td>
                 <td>{{ returnToLocaleString(V.invalid_power || 0) }}</td>

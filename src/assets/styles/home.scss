@@ -1,4 +1,4 @@
-.main-con {
+.home-con {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
@@ -21,8 +21,7 @@
       background-color: #126bac;
 
       .title-box {
-        display: flex;
-        gap: 10px;
+        @include flex(row, flex-start, center, 10px);
         p {
           cursor: pointer;
           font-weight: 700;
@@ -33,12 +32,10 @@
             position: relative;
 
             &::before {
-              position: absolute;
               content: '';
+              @include size(100%, 2px);
+              @include position(absolute, 100%, 0);
               display: inline-block;
-              width: 100%;
-              height: 2px;
-              top: 100%;
               background-color: #fff;
             }
           }
@@ -46,31 +43,20 @@
       }
       .rit-btn {
         text-align: right;
-        display: flex;
-        align-items: center;
-        flex-direction: row;
-        justify-content: flex-end;
-        gap: 14px;
+        @include flex(row, flex-end, center, 14px);
 
         a {
-          color: #fff;
-          font-size: 12px;
-          font-weight: 700;
+          @include typography(12px, 700, #fff);
+          @include flex(row, center, center);
           padding-left: 14px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          flex-direction: row;
           border-left: dashed 1px rgba(#fff, 0.1);
           white-space: nowrap;
           cursor: pointer;
 
           &::after {
             content: '';
-            position: relative;
-            left: 6px;
-            width: 6px;
-            height: 10px;
+            @include position(relative, 0, 6px);
+            @include size(6px, 10px);
             background: url('/src/assets/images/common/ico_right.png') no-repeat
               left 0;
           }
@@ -99,27 +85,23 @@
       grid-template-columns: repeat(6, 1fr);
       gap: 28px;
       li {
-        position: relative;
-        display: flex;
-        align-items: center;
+        @include flex(row, flex-start, center);
+        @include position(relative, 0, 0);
         height: 79px;
         p {
           position: relative;
           padding-left: 54px;
-          font-size: 16px;
-          color: #8a95aa;
+          @include typography(16px, normal, #8a95aa);
+
           strong {
             color: #fff;
             display: block;
           }
           &::before {
             content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
+            @include size(44px, 44px);
+            @include position(absolute, 0, 0);
             display: inline-block;
-            width: 44px;
-            height: 44px;
             background: url('/src/assets/images/common/ico_weather.png')
               no-repeat 0 0;
           }
@@ -134,9 +116,7 @@
         &:nth-child(1) {
           p {
             &::before {
-              position: absolute;
-              top: 0;
-              left: -10px;
+              @include position(absolute, 0, -10px);
               width: 64px;
               background: url('/src/assets/images/common/sprite_weather.png')
                 no-repeat 0 0;
@@ -161,7 +141,7 @@
           right: -14px;
           width: 1px;
           height: 100%;
-          background-color: rgba(45, 58, 124, 1);
+          background-color: rgb(255, 255, 255, 0.1);
           display: inline-block;
         }
         &:last-child::after {
@@ -204,7 +184,7 @@
           right: -14px;
           width: 1px;
           height: 100%;
-          background-color: rgba(45, 58, 124, 1);
+          background-color: rgb(255, 255, 255, 0.1);
           display: inline-block;
         }
         &:last-child {
@@ -291,10 +271,8 @@
             }
 
             dd {
-              font-size: 24px;
+              @include typography(24px, bold, #fff);
               line-height: 25px;
-              font-weight: bold;
-              color: #ffffff;
 
               span {
                 display: block;
@@ -336,9 +314,7 @@
           }
 
           div {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            @include flex(row, space-between, center);
             font-size: 14px;
             color: #ffffff;
 
@@ -397,18 +373,15 @@
     }
 
     .charge-con {
+      @include center-flex();
       flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       gap: 50px;
       margin-top: -20px;
 
       .prev,
       .next {
+        @include size(10px, 15px);
         cursor: pointer;
-        width: 10px;
-        height: 15px;
         z-index: 10;
       }
       .prev {
@@ -431,8 +404,7 @@
           overflow: visible;
         }
         .swiper-slide {
-          display: flex;
-          align-items: center;
+          @include center-flex();
           max-width: 100px;
           height: 100px;
           box-sizing: border-box;
@@ -440,10 +412,9 @@
         }
 
         p {
+          @include size(200px, 60px);
           position: relative;
-          width: 200px;
-          height: 60px;
-          background: url('/src/assets/images/common/sprite_save02.png')
+          background: url('/src/assets/images/common/sprite_battery.png')
             no-repeat -10px;
 
           span {
