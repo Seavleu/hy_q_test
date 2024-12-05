@@ -5,3 +5,8 @@ export const returnToLocaleString = (val: string | number | null | undefined): s
     }
     return '-'
 }
+
+export const formatTime = (time: string | null | undefined): string => {
+    return time ? `${time.slice(0, 2)}:${time.slice(2)}` : '00:00'
+}
+
