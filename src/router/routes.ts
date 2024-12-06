@@ -59,31 +59,8 @@ export const routes = [
         meta: { title: '전력발전' },
         children: [
           {
-            path: '/generation/invalidity',
-            component: () => import(/* webpackChunkName: "InvalidityBaseView" */ '@/components/shared/TabNav.vue'),
-            meta: {
-              title: '무효전력량',
-              tabData: [
-                { title: '현황', path: '/generation/invalidity/current' },
-                { title: '통계차트', path: '/generation/invalidity/chart' },
-              ],
-            },
-            children: [
-              {
-                path: 'current',
-                component: () => import(/* webpackChunkName: "InvalidityCurrent" */ '@/views/generation/invalidity/Current.vue'),
-                meta: { title: '현황' },
-              },
-              {
-                path: 'chart',
-                component: () => import(/* webpackChunkName: "InvalidityChart" */ '@/views/generation/invalidity/Chart.vue'),
-                meta: { title: '통계차트' },
-              },
-            ],
-          },
-          {
             path: '/generation/production',
-            component: () => import(/* webpackChunkName: "ProductionBaseView" */ '@/components/shared/TabNav.vue'),
+            component: () => import(/* webpackChunkName: "ProductionTabNav" */ '@/components/shared/TabNav.vue'),
             meta: {
               title: '생산전력량',
               tabData: [
@@ -105,8 +82,31 @@ export const routes = [
             ],
           },
           {
+            path: '/generation/invalidity',
+            component: () => import(/* webpackChunkName: "InvalidityTabNav" */ '@/components/shared/TabNav.vue'),
+            meta: {
+              title: '무효전력량',
+              tabData: [
+                { title: '현황', path: '/generation/invalidity/current' },
+                { title: '통계차트', path: '/generation/invalidity/chart' },
+              ],
+            },
+            children: [
+              {
+                path: 'current',
+                component: () => import(/* webpackChunkName: "InvalidityCurrent" */ '@/views/generation/invalidity/Current.vue'),
+                meta: { title: '현황' },
+              },
+              {
+                path: 'chart',
+                component: () => import(/* webpackChunkName: "InvalidityChart" */ '@/views/generation/invalidity/Chart.vue'),
+                meta: { title: '통계차트' },
+              },
+            ],
+          },
+          {
             path: '/generation/weather',
-            component: () => import(/* webpackChunkName: "WeatherBaseView" */ '@/components/shared/TabNav.vue'),
+            component: () => import(/* webpackChunkName: "WeatherTabNav" */ '@/components/shared/TabNav.vue'),
             meta: {
               title: '기상관측',
               tabData: [

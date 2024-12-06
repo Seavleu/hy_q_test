@@ -1,0 +1,143 @@
+.production-con {
+  .current-con,
+  .chart-con {
+    padding-top: 30px;
+    .display-box {
+      padding-bottom: 60px;
+
+      ul {
+        grid-template-columns: repeat(3, 1fr);
+        li {
+          @include flex(row, center);
+          margin-left: 0;
+        }
+        padding: 30px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        border: 1px solid #fff;
+        border-radius: 8px;
+
+        li {
+          @include position(relative);
+          @include flex(row, flex-start, center);
+          margin-left: 30px;
+          height: 54px;
+
+          p {
+            @include position(relative);
+            padding-left: 74px;
+            @include typography(14px, normal, #fff);
+
+            strong {
+              @include typography(30px, 600, #fff);
+              display: block;
+
+              span {
+                @include typography(18px, normal, #8a95aa);
+              }
+            }
+
+            &::before {
+              content: '';
+              @include position(absolute, 3px, 0);
+              @include size(60px, 54px);
+              background: url('/src/assets/images/common/sprite_production.png')
+                no-repeat 0 0;
+            }
+          }
+
+          &:nth-child(1) p::before {
+            background: url('/src/assets/images/common/ico_test01.png')
+              no-repeat 0 0;
+            @include size(75px, 54px);
+            margin-left: -10px;
+          }
+
+          &:nth-child(2) p::before {
+            background-position-x: -95px;
+          }
+
+          &:nth-child(3) p::before {
+            background-position-x: -430px;
+          }
+
+          &:nth-child(4) p::before {
+            background-position-x: right;
+          }
+
+          &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            @include size(1px, 100%);
+            background-color: rgba(255, 255, 255, 0.25);
+            display: inline-block;
+          }
+          &:last-child {
+            &::after {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+    .search-box {
+      margin-bottom: 10px;
+    }
+    .chart-box {
+      padding-bottom: 60px;
+      .line,
+      .bar {
+        &:hover {
+          opacity: 0.8;
+          transition: all 0.3s ease;
+        }
+
+        &:active {
+          opacity: 0.8;
+          transform: scale(0.98);
+        }
+      }
+
+      .zoom-in,
+      .zoom-out {
+        transition: all 0.3s ease;
+
+        &:hover {
+          opacity: 0.8;
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        &:active {
+          opacity: 0.6;
+          transform: scale(0.98);
+        }
+
+        &:focus {
+          outline: none;
+          @include box-shadow(#2d3a7c, 0.8);
+        }
+      }
+
+      span {
+        @include flex(row, center, center);
+        @include position(absolute, 0, 0);
+        height: 26px;
+        padding: 4px 10px;
+        border-radius: 13px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+      }
+    }
+    .table-box {
+      .tit {
+        font-size: 20px;
+        font-weight: 600;
+        padding-bottom: 20px;
+        span {
+          color: #ffe500;
+        }
+      }
+    }
+  }
+}

@@ -1,35 +1,13 @@
+// ** AUTH_API types ** //
 export interface LoginRequest {
-  user_id: string;
-  user_pw: string; 
+  user_id: string
+  user_pw: string
 }
-// TODO: Update Data Type
 export interface AutoLogin {
-  token: string;
+  token: string
 }
 
-export interface productionCurrent {
-
-}
-
-export interface productionChart {
-
-}
-export interface InvalidCurrent {
-
-}
-
-export interface InvalidChart {
-
-}
-
-export interface weatherCurrent {
-
-}
-
-export interface weatherChart {
-
-}
-
+// ** HOME_API types ** //
 export interface HomeCurrentData {
   weather_info: {
     area_name: string
@@ -114,3 +92,38 @@ export interface HomeCurrentData {
     }>
   }
 }
+
+// ** GENERATION_API types **//
+export interface DateRange {
+  start: Date
+  end: Date
+}
+export interface ProductionChartParams {
+  plant_seq: number
+  start_date: string
+  end_date: string
+  device_id?: number
+}
+export interface ProductionChartData {
+  power_data: {
+    tot_power_trans: number;
+    tot_power_gen: number;
+    trans_per: number;
+  };
+  graph_data_list: Array<{
+    time_hour: string;
+    kw: number;
+    scaled_kw: number;
+  }>;
+  invert_report_list: Array<{
+    device_name: string;
+    value: number;
+  }>;
+}
+
+export interface InvalidCurrent { }
+export interface InvalidChart { }
+export interface weatherCurrent { }
+export interface weatherChart { }
+
+// ** OTHER_API types **//

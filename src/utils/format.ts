@@ -10,3 +10,10 @@ export const formatTime = (time: string | null | undefined): string => {
     return time ? `${time.slice(0, 2)}:${time.slice(2)}` : '00:00'
 }
 
+export const formatTotal = (val: string | number | null | undefined): string => {
+    if (val !== null && val !== undefined) {
+        const num = Number(val).toFixed(2)
+        return num.toLocaleString('ko-KR')
+    }
+    return '-'
+}
