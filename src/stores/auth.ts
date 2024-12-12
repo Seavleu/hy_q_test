@@ -1,9 +1,14 @@
 import { defineStore } from 'pinia'
 import { AUTH_API } from '@/lib/api'
 import { useCookies } from 'vue3-cookies'
-import { useUserStore } from './user'
-import type { User } from '@/types/store'
+import { useUserStore } from './user' 
 import { useRouter } from 'vue-router'
+interface User {
+  plant_seq: number
+  plant_name: string
+  user_id: string
+  user_seq: number
+}
 
 export const useAuthStore = defineStore('auth', () => {
   const { cookies } = useCookies()

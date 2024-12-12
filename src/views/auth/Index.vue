@@ -58,18 +58,10 @@ onMounted(() => {
         </p>
         <p>
           <label>PW</label>
-          <input
-            v-model="userPw"
-            type="password"
-            @keyup.enter="login"
-            placeholder="비밀번호 입력" />
+          <input v-model="userPw" type="password" @keyup.enter="login" placeholder="비밀번호 입력" />
         </p>
         <p>
-          <input
-            type="checkbox"
-            id="saveLogin"
-            v-model="saveLoginId"
-            @change="saveId" />
+          <input type="checkbox" id="saveLogin" v-model="saveLoginId" @change="saveId" />
           <label for="saveLogin"></label>
           <span>아이디 저장</span>
         </p>
@@ -84,9 +76,7 @@ onMounted(() => {
                   관리자에게 문의해주세요.
                 </dt>
                 <dd>
-                  <v-btn color="#E83830" flat @click="(errorMessage = false)"
-                    >확인</v-btn
-                  >
+                  <v-btn color="#E83830" flat @click="(errorMessage = false)">확인</v-btn>
                 </dd>
               </dl>
             </div>
@@ -107,4 +97,4 @@ onMounted(() => {
   </div>
 </template>
 
-<style scoped lang="scss" src="@/assets/styles/auth.scss"/>
+<style scoped lang="scss" src="@/assets/styles/auth.scss" />
