@@ -43,7 +43,8 @@ const getStats = async () => {
 
     const { data } = await GENERATION_API.productionChart(params)
     if (!data) {
-      console.warn('API returned empty data') 
+      console.warn('API returned empty data')
+      alert('No data received')
       return
     }
 
@@ -79,75 +80,49 @@ const zoomIn = () => zoomChart(chart, 0.8)
 const zoomOut = () => zoomChart(chart, 1.2)
 </script>
 
-
 <template>
   <div class="production-con">
     <div class="sub-title">
       <dl>
         <dt>생산전력량 통계차트</dt>
         <dd>
-          <span>{{
-            moment().subtract(1, 'days').format('YYYY년 M월 D일') + '(어제)'
-          }}</span>
+          <span>{{ moment().subtract(1, 'days').format('YYYY년 M월 D일') + '(어제)' }}</span>
           까지의 생산전력량 통계를 확인할 수 있습니다.
         </dd>
       </dl>
     </div>
-
     <div class="chart-con">
       <div class="display-box">
         <ul>
           <li>
             <p>
-              총 수차 발전량
-              <strong
-                >
-                {{ returnToLocaleString(chartData.power_data?.tot_power_gen) }}
-                <span>MWh</span></strong
-              >
+              총 수차 발전량 <strong>{{returnToLocaleString(chartData.power_data?.tot_power_gen) }}
+                <span>MWh</span></strong>
             </p>
           </li>
           <li>
             <p>
-              총 인버터 발전량
-              <strong
-                >
-                {{returnToLocaleString(chartData.power_data?.tot_power_trans)}}
-                <span>MWh</span></strong
-              >
+              총 인버터 발전량 <strong>{{returnToLocaleString(chartData.power_data?.tot_power_trans) }}
+                <span>MWh</span></strong>
             </p>
           </li>
           <li>
             <p>
-              AC/AC 변환효율
-              <strong
-                >
-                {{ returnToLocaleString(chartData.power_data?.trans_per) }}
-                <span>%</span></strong
-              >
+              AC/AC 변환효율 <strong>{{returnToLocaleString(chartData.power_data?.trans_per) }}
+                <span>%</span></strong>
             </p>
           </li>
           <li>
             <p>
               생산효율
-              <strong class="color-y"
-                >
-                {{
-                  formatTotal(
-                    (chartData.power_data?.tot_power_trans /
-                      chartData.power_data?.tot_power_gen) *
-                      100
-                  )
-                }}
-                <span>%</span></strong
-              >
+              <strong class="color-y">{{formatTotal((chartData.power_data?.tot_power_trans /
+                chartData.power_data?.tot_power_gen) * 100) }} <span>%</span></strong>
             </p>
           </li>
         </ul>
       </div>
 
-      <!-- Search Box -->
-       <!-- <div class="search-box">
+      <!-- <div class="search-box">
         <dl>
           <dt>장비</dt>
           <dd>
@@ -178,11 +153,10 @@ const zoomOut = () => zoomChart(chart, 1.2)
         </dl>
         <div v-if="isLoading">
         </div>
-       </div> -->
-       
-      <!-- ChartBox -->
+      </div> -->
+
       <div class="chart-box">
-        <div class="chart-btn"> 
+        <div class="chart-btn">
           <a :class="['line', { active: chartType === 'line' }]" @click="toggleChartType('line')">LINE</a>
           <a :class="['bar', { active: chartType === 'bar' }]" @click="toggleChartType('bar')">BAR</a>
           <a class="zoom-in" @click="zoomIn">확대</a>
@@ -192,7 +166,6 @@ const zoomOut = () => zoomChart(chart, 1.2)
         <span>{{ moment(range.end).format('YYYY-MM-DD') }}</span>
       </div>
 
-      <!-- Table -->
       <div class="table-box">
         <div class="tit">
           <span>{{ moment(range.start).format('YYYY.MM.DD') }} ~ {{ moment(range.end).format('YYYY.MM.DD') }}</span>
@@ -241,61 +214,62 @@ const zoomOut = () => zoomChart(chart, 1.2)
               </tr>
             </thead>
             <tbody>
-              <tr v-for="V in chartData.invert_report_list" :key="V.value">
+              <tr v-for="V in chartData.invert_report_list" :key="V.device_id">
                 <td class="right-line">{{ V.device_name || '-' }}</td>
-                <td class="cor0">{{ returnToLocaleString(V.ac_v) }}</td>
-                <td class="cor0">{{ returnToLocaleString(V.ac_a) }}</td>
-                <td class="cor0 right-line">{{ returnToLocaleString(V.ac_kw) }}</td>
-                <td class="cor1">{{ returnToLocaleString(V.ac_v) }}</td>
-                <td class="cor1">{{ returnToLocaleString(V.ac_a) }}</td>
-                <td class="cor1 right-line">{{ returnToLocaleString(V.ac_kw) }}</td>
-                <td>{{ returnToLocaleString(V.kwh_t) }}</td>
-                <td>{{ returnToLocaleString(V.p_h) }}</td>
-                <td>{{ returnToLocaleString(V.trans_per) }}</td>
-                <td>{{ returnToLocaleString(V.hz) }}</td>
-                <td>{{ returnToLocaleString(V.pf) }}</td>
+                <td class="cor0">{{returnToLocaleString(V.ac_v) }}</td>
+                <td class="cor0">{{returnToLocaleString(V.ac_a) }}</td>
+                <td class="cor0 right-line">{{returnToLocaleString(V.ac_kw) }}</td>
+                <td class="cor1">{{returnToLocaleString(V.ac_v) }}</td>
+                <td class="cor1">{{returnToLocaleString(V.ac_a) }}</td>
+                <td class="cor1 right-line">{{returnToLocaleString(V.ac_kw) }}</td>
+                <td>{{returnToLocaleString(V.kwh_t) }}</td>
+                <td>{{returnToLocaleString(V.p_h) }}</td>
+                <td>{{returnToLocaleString(V.trans_per) }}</td>
+                <td>{{returnToLocaleString(V.hz) }}</td>
+                <td>{{returnToLocaleString(V.pf) }}</td>
               </tr>
+              
               <tr v-for="V in chartData.invert_report_list" :key="V.device_id">
                 <td class="right-line"><strong>합계/평균</strong></td>
                 <td>
-                  <strong>{{ formatTotal(V.ac_v) }}</strong>
+                  <strong>{{formatTotal(V.ac_v) }}</strong>
                 </td>
                 <td>
-                  <strong>{{ formatTotal(V.ac_a) }}</strong>
+                  <strong>{{formatTotal(V.ac_a) }}</strong>
                 </td>
                 <td class="right-line">
-                  <strong>{{ formatTotal(V.ac_kw) }}</strong>
+                  <strong>{{formatTotal(V.ac_kw) }}</strong>
                 </td>
                 <td>
-                  <strong>{{ formatTotal(V.ac_v) }}</strong>
+                  <strong>{{formatTotal(V.ac_v) }}</strong>
                 </td>
                 <td>
-                  <strong>{{ formatTotal(V.ac_a) }}</strong>
+                  <strong>{{formatTotal(V.ac_a) }}</strong>
                 </td>
                 <td class="right-line">
-                  <strong>{{ formatTotal(V.ac_kw) }}</strong>
+                  <strong>{{formatTotal(V.ac_kw) }}</strong>
                 </td>
                 <td>
-                  <strong>{{ formatTotal(V.kwh_t) }}</strong>
+                  <strong>{{formatTotal(V.kwh_t) }}</strong>
                 </td>
                 <td>
-                  <strong>{{ formatTotal(V.p_h) }}</strong>
+                  <strong>{{formatTotal(V.p_h) }}</strong>
                 </td>
                 <td>
-                  <strong>{{ formatTotal(V.trans_per) }}</strong>
+                  <strong>{{formatTotal(V.trans_per) }}</strong>
                 </td>
                 <td>
-                  <strong>{{ formatTotal(V.hz) }}</strong>
+                  <strong>{{formatTotal(V.hz) }}</strong>
                 </td>
                 <td>
-                  <strong>{{ formatTotal(V.pf) }}</strong>
+                  <strong>{{formatTotal(V.pf) }}</strong>
                 </td>
               </tr>
+
             </tbody>
           </table>
         </div>
       </div>
-  
     </div>
   </div>
 </template>

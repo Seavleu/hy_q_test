@@ -126,4 +126,363 @@ export interface InvalidChart { }
 export interface weatherCurrent { }
 export interface weatherChart { }
 
+// ** API_REPORT 보고서 컨트롤러 ** //
+// ** API_REPORT Download
+export interface YearTemp {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+export interface YearSystem {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+export interface YearPv {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+export interface YearInverter {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+export interface WeekTemp {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+export interface WeekSystem {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+export interface WeekPv {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+export interface WeekInverter {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+export interface Rec {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+export interface PowerGen {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+export interface MonthTemp {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+
+export interface MonthSystem {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+export interface MonthPv {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+export interface MonthInverter {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+export interface DailyTemp {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+
+export interface DailySystem {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+export interface DailyPv {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+export interface DailyInverter {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+
+// ** API_REPORT DEVICE 
+export interface YearTemp {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+export interface YearSystem {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+export interface YearPv {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+export interface YearInverter {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+export interface WeekTemp {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+export interface WeekSystem {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+export interface WeekPv {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+export interface WeekInverter {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+export interface Rec {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+export interface PowerGen {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+export interface MonthTemp {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+
+export interface MonthSystem {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+export interface MonthPv {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+export interface MonthInverter {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+export interface DailyTemp {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+
+export interface DailySystem {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+export interface DailyPv {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+export interface DailyInverter {
+  plant_seq: string
+  start_date: string
+  end_date: string
+  date: string
+  time: string
+}
+
+// **SCHEMA**//
+export interface DeviceInspectionDTO {
+  ins_type: string
+  title: string
+  content: string
+  plant_seq: string
+  reg_user_seq: string
+  file_seq_list: string
+  inspection_seq: string
+}
+export interface DeviceErrorFixDTO {
+  device_error_seq: string
+  title: string
+  content: string
+  plant_seq: string
+  reg_user_seq: string
+  file_seq_list: string
+  device_error_fix_seq: string
+}
+export interface UserAppAlarmDTO {
+  user_seq: string
+  app_alarm_seq: string
+  app_type: string
+}
+export interface UserAppDTO {
+  user_seq: string
+  device_token: string
+  app_ver: string
+  os: string
+  is_push: string
+  app_type: string
+}
+export interface PlantManagerDTO{
+  user_name: string
+  position: string
+  mobile_phone: string
+  email: string
+  businessRegistrationNumber: string
+  plantLocationSido: string
+  plantLocationGugun: string
+  plantLocationDong: string
+  zipCode: string 
+  businessAddress: string
+  businessAddressDetail: string
+}
+export interface DeviceFilterDTO {
+  device_error_code_seq: string
+  is_use: string
+  plant_seq: string
+}
+export interface AlarmUserDTO {
+  user_name: string
+  mobile_phone: string
+  email: string
+  plant_seq: string
+  plant_user_seq: string
+  plant_alarm_seq: string
+}
+export interface FCMAlarmDTO {
+  user_seq: string;
+  app_alarm_seq: string;
+  reserve_datetime: string; 
+  app_type: string;
+}
+export interface FCMNotificationDTO{
+  title:	string
+  url:	string
+  content:	string
+}
+
+export interface RecipientDTO {
+  phone: string
+  templateParam: string[] 
+}
+export interface AlrimtalkDTO {
+  templateCode: string
+  reserve: string 
+  sendDate: string 
+  reSend: string
+  resendCallback: string 
+  resendType: string
+  resendTitle: string
+  resendContent: string 
+  list: RecipientDTO[]
+}
+export interface RecipientDTO {
+  phone: string;
+  templateParam: string[];  
+}
+export interface ReportSearchDTO {
+  plant_seq: string
+  start_date: string 
+  end_date: string
+  date: string
+  time: string 
+}
+
 // ** OTHER_API types **//
+

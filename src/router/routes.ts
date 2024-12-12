@@ -54,7 +54,7 @@ export const routes = [
         meta: { title: '전력계통도' },
       },
       {
-        path: '/generation',
+        path: '/generation/production/current',
         name: 'power-generation',
         meta: { title: '전력발전' },
         children: [
@@ -68,6 +68,7 @@ export const routes = [
                 { title: '통계차트', path: '/generation/production/chart' },
               ],
             },
+            redirect: '/generation/production/current',
             children: [
               {
                 path: 'current',
@@ -91,6 +92,7 @@ export const routes = [
                 { title: '통계차트', path: '/generation/invalidity/chart' },
               ],
             },
+            redirect: '/generation/invalidity/current',
             children: [
               {
                 path: 'current',
@@ -114,6 +116,7 @@ export const routes = [
                 { title: '통계차트', path: '/generation/weather/chart' },
               ],
             },
+            redirect: '/generation/weather/current',
             children: [
               {
                 path: 'current',
@@ -129,7 +132,7 @@ export const routes = [
           },
           {
             path: '/generation/forecast',
-            component: () => import(/* webpackChunkName: "ForecastView" */ '@/components/shared/TabNav.vue'),
+            component: () => import(/* webpackChunkName: "ForecastView" */ '../views/generation/forecast/Index.vue'),
             meta: {
               title: '기상관측',
             },
@@ -139,7 +142,7 @@ export const routes = [
 
       // ** 전력송전 ** //
       {
-        path: '/transmit',
+        path: '/transmit/rec/current',
         name: 'power-transmit',
         meta: { title: '전력송전' },
         children: [
@@ -153,6 +156,7 @@ export const routes = [
                 { title: '통계차트', path: '/transmit/rec/chart' },
               ],
             },
+            redirect: '/transmit/rec/current',
             children: [
               {
                 path: 'current',
@@ -166,16 +170,18 @@ export const routes = [
               },
             ],
           },
+
           {
             path: '/transmit/smp',
-            component: () => import(/* webpackChunkName: "Smp" */ '@/components/shared/TabNav.vue'),
+            component: () => import(/* webpackChunkName: "Rec" */ '@/components/shared/TabNav.vue'),
             meta: {
               title: '생산전력량',
               tabData: [
                 { title: '현황', path: '/transmit/smp/current' },
                 { title: '통계차트', path: '/transmit/smp/chart' },
               ],
-            },
+            }, 
+            redirect: '/transmit/smp/current',
             children: [
               {
                 path: 'current',
@@ -188,7 +194,7 @@ export const routes = [
                 meta: { title: '통계차트' },
               },
             ],
-          },
+          }, 
           {
             path: '/transmit/trends',
             component: () => import(/* webpackChunkName: "Trends" */ '@/views/transmit/trends/Index.vue'),
@@ -201,12 +207,12 @@ export const routes = [
 
       // ** 장치관리 ** //
       {
-        path: '/management',
+        path: '/management/status/',
         name: 'device-management',
         meta: { title: '장치관리' },
         children: [
           {
-            path: '/management/status',
+            path: '/management/status/',
             component: () => import(/* webpackChunkName: "StatusManagement" */ '@/views/management/status/Index.vue'),
             meta: {
               title: '장치 현황',
@@ -229,6 +235,7 @@ export const routes = [
                 { title: '등록', path: '/management/problem/registration' },
               ],
             },
+            redirect: '/management/problem/record',
             children: [
               {
                 path: 'record',
@@ -252,6 +259,7 @@ export const routes = [
                 { title: '등록', path: '/management/inspect/registration' },
               ],
             },
+            redirect: '/management/inspect/record',
             children: [
               {
                 path: 'record',
@@ -272,6 +280,7 @@ export const routes = [
       {
         path: '/abnormal',
         name: 'abnormalSign-detection',
+        component: () => import(/* webpackChunkName: "AbnormalSignDetection" */ '@/views/abnormal/Index.vue'),
         meta: { title: '이상징후' },
       },
 
@@ -279,6 +288,7 @@ export const routes = [
       {
         path: '/report',
         name: 'report-files',
+        component: () => import(/* webpackChunkName: "ReportManagement" */ '@/views/report/Index.vue'),
         meta: { title: '보고서' },
       },
     ]

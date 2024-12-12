@@ -33,8 +33,7 @@ const logout = () => {
 }
 
 const isActive = (itemPath) => {
-  const currentPath = route.path
-  return currentPath === itemPath || currentPath.startsWith(itemPath)
+  return route.matched.some(record => record.path === itemPath)
 }
 </script>
 
