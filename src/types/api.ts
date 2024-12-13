@@ -121,7 +121,12 @@ export interface ProductionChartData {
   }>;
 }
 
-export interface InvalidCurrent { }
+export interface InvalidCurrent { 
+  plant_seq: number
+  start_date: string
+  end_date: string
+  device_id?: number
+}
 export interface InvalidChart { }
 export interface weatherCurrent { }
 export interface weatherChart { }
