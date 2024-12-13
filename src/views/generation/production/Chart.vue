@@ -2,10 +2,11 @@
 import moment from 'moment'
 import { GENERATION_API } from '@/lib/api'
 import { useScreens } from 'vue-screen-utils'
-import { ref, reactive, watch, onMounted } from 'vue'
+import { ref, reactive, watch, onMounted, computed } from 'vue'
 import chartJson from '@/assets/json/charts/production/powerProductionChart1.json'
 import { initChart, setChartData, toggleChartType, zoomChart } from '@/utils/charts'
 import type { ProductionChartData, ProductionChartParams } from '@/types/api'
+import { handleApiResponse } from '@/utils/apiUtils'
 import { formatTotal, returnToLocaleString } from '@/utils/format'
 
 const { mapCurrent } = useScreens({
@@ -17,19 +18,25 @@ const { mapCurrent } = useScreens({
 
 const columns = mapCurrent({ lg: 2 }, 2)
 const expanded = mapCurrent({ lg: false }, true)
-
 const chart = ref({ ...chartJson })
 const range = ref({ start: new Date(), end: new Date() })
 const toggleNone = ref(1)
 const invert = ref(0)
-const invertList = ref([{ title: '전체', value: 0 }])
+const isLoading = ref(false)
+
 const chartData = reactive<ProductionChartData>({
   power_data: { tot_power_trans: 0, tot_power_gen: 0, trans_per: 0 },
   graph_data_list: [],
   invert_report_list: [],
 })
-const chartType = ref<'line' | 'bar'>('line')
-const isLoading = ref(false)
+
+const invertList = computed(() => [
+  { title: '전체', value: 0 },
+  ...(chartData.invert_report_list?.map((v, idx) => ({
+    title: v.device_name,
+    value: idx + 1,
+  })) ?? []),
+])
 
 const getStats = async () => {
   try {
@@ -41,26 +48,15 @@ const getStats = async () => {
       ...(invert.value !== 0 && { device_id: invert.value }),
     }
 
-    const { data } = await GENERATION_API.productionChart(params)
-    if (!data) {
-      console.warn('API returned empty data')
-      alert('No data received')
-      return
-    }
+    const response = await GENERATION_API.productionChart(params)
+    handleApiResponse(response, (data: any) => {
+      chartData.power_data = data.power_data
+      chartData.graph_data_list = data.graph_data_list
+      chartData.invert_report_list = data?.invert_report_list ?? []
 
-    chartData.power_data = data.power_data
-    chartData.graph_data_list = data.graph_data_list
-    chartData.invert_report_list = data.invert_report_list || []
-    invertList.value = [
-      { title: '전체', value: 0 },
-      ...chartData.invert_report_list.map((v, idx) => ({
-        title: v.device_name,
-        value: idx + 1,
-      })),
-    ]
-
-    initChart(chart)
-    setChartData(chart, chartData.graph_data_list, 'time_hour', ['kw', 'scaled_kw'])
+      initChart(chart)
+      setChartData(chart, chartData.graph_data_list, 'time_hour', ['kw', 'scaled_kw'])
+    })
   } catch (error) {
     console.error('Error fetching stats:', error)
   } finally {
@@ -73,12 +69,13 @@ watch(invert, getStats)
 
 onMounted(() => {
   getStats()
-  toggleChartType(chart, chartType.value)
+  toggleChartType(chart, 'line')
 })
 
 const zoomIn = () => zoomChart(chart, 0.8)
 const zoomOut = () => zoomChart(chart, 1.2)
 </script>
+
 
 <template>
   <div class="production-con">
@@ -122,7 +119,8 @@ const zoomOut = () => zoomChart(chart, 1.2)
         </ul>
       </div>
 
-      <!-- <div class="search-box">
+      
+       <div class="search-box">
         <dl>
           <dt>장비</dt>
           <dd>
@@ -153,7 +151,8 @@ const zoomOut = () => zoomChart(chart, 1.2)
         </dl>
         <div v-if="isLoading">
         </div>
-      </div> -->
+      </div> 
+     
 
       <div class="chart-box">
         <div class="chart-btn">
