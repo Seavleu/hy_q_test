@@ -1,4 +1,4 @@
-<script setup lang="ts"> 
+<script setup lang="ts">
 import { useFetchStats } from '@/composables/useFetchStats';
 import { GENERATION_API } from '@/lib/api'
 import { formatTotal, returnToLocaleString } from '@/utils/format';
@@ -67,7 +67,7 @@ fetchChartStats()
       </div>
 
       <div class="chart-box">
-        <div class="chart-btn"> 
+        <div class="chart-btn">
           <a :class="['line', { active: chartType === 'line' }]" @click="toggleChartTypeHandler('line')">LINE</a>
           <a :class="['bar', { active: chartType === 'bar' }]" @click="toggleChartTypeHandler('bar')">BAR</a>
           <a class="zoom-in" @click="zoomIn">확대</a>

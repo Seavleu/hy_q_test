@@ -33,4 +33,6 @@ export const GENERATION_API = {
         axios.get("/api/powergen/weather/stats", { params: data }),
     weatherChart: (data: weatherChart) =>
         axios.get("/api/powergen/weather/current", { params: data }),
+    forecast: (data: weatherChart) =>
+        axios.get("/api/powergen/weather/current", { params: data }),
 }

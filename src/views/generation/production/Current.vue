@@ -55,7 +55,7 @@ const slide = (type: 'doughnut' | 'inverter', dir: 'prev' | 'next') => {
   }
 }
 
-const chartOptions = ref({ ...chartJson })
+const chart = ref({ ...chartJson })
 
 </script>
 
@@ -71,7 +71,7 @@ const chartOptions = ref({ ...chartJson })
       </dl>
     </div>
 
-    <div class="current-con">
+    <div v-if="currentData" class="current-con">
       <div class="display-box">
         <ul>
           <li>
@@ -207,7 +207,7 @@ const chartOptions = ref({ ...chartJson })
 
       <div class="chart-box">
         <div class="tit">생산 전력량과 효율 그래프</div>
-        <highcharts :options="chartOptions"></highcharts>
+        <highcharts :options="chart"></highcharts>
       </div>
 
       <div class="table-box">
@@ -239,6 +239,8 @@ const chartOptions = ref({ ...chartJson })
           </table>
         </div>
       </div>
+    </div>
+    <div v-else>
     </div>
   </div>
 </template>

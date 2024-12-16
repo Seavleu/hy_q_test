@@ -105,6 +105,7 @@ fetchChartStats()
         </dl>
         <div v-if="isLoading"></div>
       </div>
+      
       <div class="chart-box">
         <div class="chart-btn">
           <a :class="['line', { active: chartType === 'line' }]" @click="toggleChartTypeHandler('line')">LINE</a>
