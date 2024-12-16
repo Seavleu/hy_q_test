@@ -41,7 +41,7 @@ const invertList = computed(() => [
 const getStats = async () => {
   try {
     isLoading.value = true
-    const params: ProductionChartParams = {
+    const params = {
       plant_seq: 2,
       start_date: moment(range.value.start).format('YYYYMMDD'),
       end_date: moment(range.value.end).format('YYYYMMDD'),
@@ -71,6 +71,18 @@ const getStats = async () => {
   }
 }
 
+const setDateRange = (type: number) => {
+  const today = moment()
+  const ranges: Record<number, { start: Date; end: Date }> = {
+    1: { start: today.clone().subtract(1, 'days').toDate(), end: today.toDate() },
+    2: { start: today.clone().subtract(7, 'days').toDate(), end: today.toDate() },
+    3: { start: today.clone().subtract(1, 'months').toDate(), end: today.toDate() },
+  }
+
+  range.value = ranges[type] || { start: today.toDate(), end: today.toDate() }
+}
+
+
 const toggleChartTypeHandler = (type: 'line' | 'bar') => {
   chartType.value = type
   toggleChartType(chart, type)
@@ -89,6 +101,11 @@ const zoomOut = () => zoomChart(chart, 1.2)
 
 watch(range, getStats, { deep: true })
 watch(invert, getStats)
+watch(toggleNone, (newVal) => {
+  if (newVal !== 4) {
+    setDateRange(newVal)
+  }
+})
 
 onMounted(() => {
   getStats()
@@ -140,37 +157,44 @@ onMounted(() => {
 
 
       <div class="search-box">
-        <dl>
-          <dt>장비</dt>
-          <dd>
-            <v-combobox :items="invertList" v-model="invert" item-title="title" item-value="value" variant="outlined"
-              placeholder="선택" style="min-width: 120px" :disabled="toggleNone === 0 || isLoading"></v-combobox>
-          </dd>
-          <dd class="toggle-btn">
-            <v-btn-toggle v-model="toggleNone" class="v-btn-group">
-              <v-btn variant="outlined" :value="1" :class="{ 'v-btn--active': toggleNone === 1 }">어제</v-btn>
-              <v-btn variant="outlined" :value="2" :class="{ 'v-btn--active': toggleNone === 2 }">7일</v-btn>
-              <v-btn variant="outlined" :value="3" :class="{ 'v-btn--active': toggleNone === 3 }">한달</v-btn>
-              <v-btn variant="outlined" :value="4" :class="{ 'v-btn--active': toggleNone === 4 }">직접</v-btn>
-            </v-btn-toggle>
-          </dd>
-          <dt>날짜</dt>
-          <dd>
-            <DatePicker v-model="range" :columns="columns" is-range :disabled="toggleNone !== 4 || isLoading">
-              <template #default="slotProps">
-                <div class="picker-date">
-                  <input :value="inputValue.start" disabled />
-                  ~
-                  <input :value="inputValue.end" disabled />
-                  <a @click="toggleNone === 4 && !isLoading && togglePopover()">켈린더</a>
-                </div>
-              </template>
-            </DatePicker>
-          </dd>
-        </dl>
-        <div v-if="isLoading">
-        </div>
-      </div>
+      <dl>
+        <dt>장비</dt>
+        <dd>
+          <v-combobox
+            :items="invertList"
+            v-model="invert"
+            item-title="title"
+            item-value="value"
+            variant="outlined"
+            placeholder="선택"
+            style="min-width: 120px"
+            :disabled="toggleNone === 0 || isLoading"
+          ></v-combobox>
+        </dd>
+        <dd class="toggle-btn">
+          <v-btn-toggle v-model="toggleNone" class="v-btn-group">
+            <v-btn variant="outlined" :value="1" :class="{ 'v-btn--active': toggleNone === 1 }">어제</v-btn>
+            <v-btn variant="outlined" :value="2" :class="{ 'v-btn--active': toggleNone === 2 }">7일</v-btn>
+            <v-btn variant="outlined" :value="3" :class="{ 'v-btn--active': toggleNone === 3 }">한달</v-btn>
+            <v-btn variant="outlined" :value="4" :class="{ 'v-btn--active': toggleNone === 4 }">직접</v-btn>
+          </v-btn-toggle>
+        </dd>
+        <dt>날짜</dt>
+        <dd>
+          <DatePicker v-model="range" :columns="2" is-range :disabled="toggleNone !== 4 || isLoading">
+            <template #default="slotProps">
+              <div class="picker-date">
+                <input :value="range.start" disabled />
+                ~
+                <input :value="range.end" disabled />
+                <a @click="toggleNone === 4 && !isLoading && togglePopover()">켈린더</a>
+              </div>
+            </template>
+          </DatePicker>
+        </dd>
+      </dl>
+      <div v-if="isLoading">Loading...</div>
+    </div>
 
       <div class="chart-box">
         <div class="chart-btn">

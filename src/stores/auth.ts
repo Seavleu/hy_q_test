@@ -26,7 +26,7 @@ export const useAuthStore = defineStore('auth', () => {
           user_id: userId,
           user_seq,
           plant_seq,
-          plant_name,
+        plant_name,
         }
 
         // ** 7일 이내에 사용자 브라우저에서 쿠키 만료 ** //
