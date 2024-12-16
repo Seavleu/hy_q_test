@@ -114,7 +114,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="production-con">
+  <div class="invalid-con">
     <div class="sub-title">
       <dl>
         <dt>생산전력량 통계차트</dt>
