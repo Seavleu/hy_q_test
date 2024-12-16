@@ -517,20 +517,24 @@
       padding-right: 10px;
       display: flex;
       align-items: center;
+      margin-bottom:18px;
       font-size: 16px;
       font-weight: 600;
     }
-    dd {
+    dd { 
       &.toggle-btn {
         .v-btn-group {
-          height: 50px;
+          height: 80px;
           .v-btn {
             margin-left: 6px;
-            border: 1px solid #fff;
-            border-radius: 6px;
-            font-size: 15px;
+            border: 1px solid #fff; 
+            height: 56px;
+            color: #fff;
+            border-radius: 6px; 
+            font-size: 15px; 
             &.v-btn--active {
               border-color: #e83830;
+              color: #fff;
               .v-btn__overlay {
                 opacity: 1;
                 background-color: #e83830;

@@ -2,7 +2,8 @@
 
 <template>
   <div>
-    <h1>CurrentView</h1>
+    <h1>CurrentView -  command: 'getPlantGenTodayInfo',
+      plant_seq: 2</h1>
   </div>
 </template>
 
