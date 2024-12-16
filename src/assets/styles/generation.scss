@@ -139,6 +139,355 @@
         }
       }
     }
+
+    .display-sub-box {
+      padding-bottom: 60px;
+      display: grid;
+      grid-template-columns: 1fr 650px;
+      gap: 0 60px;
+      .sub-box {
+        padding: 30px;
+        border-radius: 8px;
+        background-color: rgba(0, 0, 0, 0.1);
+        ul {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 0 30px;
+          > li {
+            position: relative;
+            &::after {
+              content: '';
+              position: absolute;
+              top: 0;
+              right: 0;
+              border-right: 1px dashed #8a95aa;
+              width: 1px;
+              height: 100%;
+              display: inline-block;
+            }
+            &:last-child {
+              &::after {
+                display: none;
+              }
+            }
+          }
+        }
+        &.left {
+          ul {
+            li {
+              dl {
+                dt {
+                  padding-bottom: 10px;
+                  font-size: 14px;
+                }
+                dd {
+                  font-size: 18px;
+                  color: #8a95aa;
+                  strong {
+                    font-size: 40px;
+                    line-height: 40px;
+                    font-weight: 800;
+                    color: #ffe500;
+                  }
+                }
+              }
+            }
+          }
+        }
+        &.right {
+          ul {
+            grid-template-columns: 1fr 220px;
+            > li {
+              position: relative;
+              display: grid;
+              grid-template-columns: repeat(2, 1fr);
+              p {
+                padding-left: 90px;
+                padding-right: 20px;
+                font-size: 40px;
+                font-weight: 600;
+                line-height: 70px;
+                span {
+                  font-size: 20px;
+                  line-height: 55px;
+                  vertical-align: top;
+                }
+                &::before {
+                  content: '';
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  width: 90px;
+                  height: 70px;
+                  display: inline-block;
+                  background: url('/src/assets/images/common/sprite_weather.png') no-repeat 0 0;
+                  background-size: 270px auto;
+                }
+                &.type0 {
+                  &::before {
+                    background-position: -8px -128px;
+                  }
+                }
+              }
+              dl {
+                align-items: center;
+                dt {
+                  padding: 12px 0 5px 0;
+                  font-size: 18px;
+                  line-height: 21px;
+                  font-weight: 600;
+                }
+                dd {
+                  font-size: 16px;
+                }
+              }
+              &:last-child {
+                display: block;
+                ol {
+                  li {
+                    padding-bottom: 2px;
+                    display: grid;
+                    grid-template-columns: 30% 1fr;
+                    font-size: 16px;
+                    strong {
+                      text-align: right;
+                    }
+                    &:last-child {
+                      padding-bottom: 0;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .current-sub-box {
+      padding-bottom: 30px;
+      display: grid;
+      grid-template-columns: 1fr 650px;
+      gap: 0 60px;
+
+      .tit { 
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        p {
+          font-size: 20px;
+          font-weight: 600; 
+          margin-bottom: 30px;
+        }
+
+        .nav {
+          display: flex;
+          gap: 20px;
+
+          span {
+            width: 1px;
+            height: 18px;
+            background-color: rgba(#fff, 0.1);
+          }
+
+          p {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+
+            &:first-child::before,
+            &:last-child::before {
+              content: '';
+              width: 10px;
+              height: 15px;
+              display: block;
+              background-size: cover;
+            }
+
+            &:first-child::before {
+              background: url('/src/assets/images/common/ico_prev.png') no-repeat center;
+            }
+
+            &:last-child::before {
+              background: url('/src/assets/images/common/ico_next.png') no-repeat center;
+            }
+
+            &.btn-disabled {
+              transition: opacity 0.3s ease, cursor 0.3s ease;
+              opacity: 0.2;
+              cursor: auto;
+            }
+          }
+        }
+      }
+
+      .doughnut-box {
+        padding-bottom: 24px;
+        .swiper {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 24px;
+          max-width: 700px;
+        }
+        .swiper-slide {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+          li {
+            position: relative;
+            padding-top: 52px;
+            width: 200px; 
+            background: url('/src/assets/images/common/bg_doughnut2_1.png') no-repeat 0 0;  
+
+            dl {
+              text-align: center;
+              position: relative;
+              padding-bottom: 10px;
+
+              dt {
+                font-size: 24px;
+                font-weight: bold;
+                padding-bottom: 5px;
+
+                span {
+                  font-size: 14px;
+                }
+              }
+
+              dd {
+                color: #8a95aa;
+              }
+            }
+
+            &::after {
+              content: '';
+              display: inline-block;
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 200px;
+              height: 200px;
+              transition: all 1s ease-out;
+              transform: rotate(var(--doughnut-value));
+              background: url('/src/assets/images/common/ico_point1.png') no-repeat 25px center;
+            }
+          }
+        
+      }
+
+      .inverter-box { 
+        .swiper {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 24px;
+
+          .swiper-slide {
+            position: relative; 
+            padding: 15px;
+            height: 80px;
+            border-radius: 8px;
+            background-color: #fff;
+
+            p {
+              padding-bottom: 5px; 
+              color: #666666;
+            }
+
+            ol {
+              li {
+                padding-bottom: 10px;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                font-size: 16px;
+                color: #666666;
+
+                span {
+                  color: #111111;
+                  font-weight: 600;
+                  line-height: 16px;
+
+                  strong {
+                    font-size: 20px;
+                    color: #00a3ff;
+                  }
+                  &:last-child {
+                    font-size: 14px;
+                    text-align: right;
+                    color: #999;
+                  }
+                }
+
+                &:last-child {
+                  padding-bottom: 0;
+                  span {
+                    strong {
+                      color: #ff8a00;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .inverter-box1 {
+        Swiper {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 0 20px;
+          > li {
+            padding: 17px 20px;
+            border-radius: 8px;
+            background-color: #fff;
+
+            p {
+              padding-bottom: 5px;
+              color: #666666;
+            }
+
+            ol {
+              li {
+                padding-bottom: 10px;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                font-size: 16px;
+                color: #666666;
+
+                span {
+                  color: #111111;
+                  font-weight: 600;
+                  line-height: 16px;
+
+                  &:first-child {
+                    font-size: 16px;
+                  }
+
+                  &:last-child {
+                    font-size: 14px;
+                    text-align: right;
+                    color: #999;
+                  }
+
+                  strong {
+                    font-size: 20px;
+
+                    &:first-child {
+                      color: #00a3ff;
+                    }
+
+                    &:last-child {
+                      color: #ff8a00;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 
@@ -277,7 +626,8 @@
       .tit {
         font-size: 20px;
         font-weight: 600;
-        padding-bottom: 20px;
+        padding-bottom: 20px; 
+
         span {
           color: #ffe500;
         }

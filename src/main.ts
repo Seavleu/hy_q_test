@@ -18,7 +18,7 @@ import App from './App.vue'
 import router from './router'
 import http from './lib/axios'
 import vuetify from './lib/vuetify'
-import { sockets, ws } from './lib/websocket'
+import { sockets, ws } from './lib/websocket' 
 
 const app = createApp(App).use(router)
 
@@ -29,7 +29,7 @@ app.use(HighchartsVue)
 app.use(Vue3Lottie)
 app.use(setupCalendar, {})
 app.use(VueIframe)  
-app.use(moment)
+app.use(moment) 
 
 const { cookies } = useCookies()
 

@@ -17,7 +17,7 @@
         "lineColor": "#F26933",
         "symbol": "circle"
       },
-      "data": []
+      "data": [10,12,15,16,18,11,12,122]
     },
     {
       "name": "생산효율",
@@ -28,7 +28,7 @@
         "lineColor": "#04C697",
         "symbol": "circle"
       },
-      "data": []
+      "data": [17,4,35,46,58,31,12.2,5.52]
     }        
   ], 
   "chart": {
@@ -45,7 +45,7 @@
     }
   },
   "xAxis": {
-    "categories": [],
+    "categories": [ ],
     "lineColor": "#525A84",
     "labels": { "style": { "color": "#fff" } }
   },
