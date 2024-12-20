@@ -12,8 +12,8 @@ export const formatTime = (time: string | null | undefined): string => {
 
 export const formatTotal = (val: string | number | null | undefined): string => {
     if (val !== null && val !== undefined) {
-        const num = Number(val).toFixed(2)
-        return num.toLocaleString('ko-KR')
+        const num = Number(val)
+        return Number(num.toFixed(2)).toLocaleString('ko-KR')
     }
     return '-'
 }

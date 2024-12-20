@@ -147,31 +147,6 @@ export const routes = [
         meta: { title: '전력송전' },
         children: [
           {
-            path: '/transmit/rec',
-            component: () => import(/* webpackChunkName: "Rec" */ '@/components/shared/TabNav.vue'),
-            meta: {
-              title: '무효전력량',
-              tabData: [
-                { title: '현황', path: '/transmit/rec/current' },
-                { title: '통계차트', path: '/transmit/rec/chart' },
-              ],
-            },
-            redirect: '/transmit/rec/current',
-            children: [
-              {
-                path: 'current',
-                component: () => import(/* webpackChunkName: "RecCurrent" */ '@/views/transmit/rec/Current.vue'),
-                meta: { title: '현황' },
-              },
-              {
-                path: 'chart',
-                component: () => import(/* webpackChunkName: "RecChart" */ '@/views/transmit/rec/Chart.vue'),
-                meta: { title: '통계차트' },
-              },
-            ],
-          },
-
-          {
             path: '/transmit/smp',
             component: () => import(/* webpackChunkName: "Rec" */ '@/components/shared/TabNav.vue'),
             meta: {
@@ -195,6 +170,30 @@ export const routes = [
               },
             ],
           }, 
+          {
+            path: '/transmit/rec',
+            component: () => import(/* webpackChunkName: "Rec" */ '@/components/shared/TabNav.vue'),
+            meta: {
+              title: '무효전력량',
+              tabData: [
+                { title: '현황', path: '/transmit/rec/current' },
+                { title: '통계차트', path: '/transmit/rec/chart' },
+              ],
+            },
+            redirect: '/transmit/rec/current',
+            children: [
+              {
+                path: 'current',
+                component: () => import(/* webpackChunkName: "RecCurrent" */ '@/views/transmit/rec/Current.vue'),
+                meta: { title: '현황' },
+              },
+              {
+                path: 'chart',
+                component: () => import(/* webpackChunkName: "RecChart" */ '@/views/transmit/rec/Chart.vue'),
+                meta: { title: '통계차트' },
+              },
+            ],
+          },
           {
             path: '/transmit/trends',
             component: () => import(/* webpackChunkName: "Trends" */ '@/views/transmit/trends/Index.vue'),
